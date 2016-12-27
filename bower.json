@@ -1,0 +1,21 @@
+{
+  "name": "accounts",
+  "version": "0.1.5",
+  "authors": [
+    "Juan Lebrijo <juan@lebrijo.com>"
+  ],
+  "description": "Minute Hero portal",
+  "license": "MIT",
+  "homepage": "https://minutehero.net",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "stringjs": "latest"
+  }
+}

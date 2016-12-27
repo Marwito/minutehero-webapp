@@ -35,4 +35,5 @@ namespace :deploy do
   end
 
   after :finishing, 'deploy:cleanup'
+  before :compile_assets, 'bower:install'
 end
