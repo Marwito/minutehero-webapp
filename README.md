@@ -26,6 +26,9 @@ Admin account by default:
 Documentation and Support
 -------------------------
 
+Services:
+* Newrelic: ops@minutehero.net / az3e5ta?
+
 Issues
 -------------
 

@@ -25,6 +25,7 @@ gem 'therubyracer', platform: :ruby
 gem 'thin'
 gem 'mailjet'
 gem 'letter_opener'
+gem 'newrelic_rpm'
 
 group :development do
   gem 'web-console'
