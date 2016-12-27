@@ -32,6 +32,7 @@ gem 'pundit'
 gem 'therubyracer', :platform=>:ruby
 gem 'thin'
 group :development do
+  gem 'rubocop'
   gem 'better_errors'
   gem 'capistrano', '~> 3.0.1'
   gem 'capistrano-bundler'
@@ -41,12 +42,15 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
+  gem 'guard-livereload'
+  gem 'guard-rubocop'
   gem 'html2haml'
   gem 'rails_layout'
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
+  gem 'erb2haml'
 end
 group :development, :test do
   gem 'factory_girl_rails'
