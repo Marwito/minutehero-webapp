@@ -9,15 +9,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-group :development, :test do
-  gem 'byebug', platform: :mri
-end
-group :development do
-  gem 'web-console'
-  gem 'listen', '~> 3.0.5'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-end
+
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'administrate'
 gem 'bootstrap', '~> 4.0.0.alpha3.1'
@@ -31,8 +23,14 @@ gem 'pg'
 gem 'pundit'
 gem 'therubyracer', platform: :ruby
 gem 'thin'
+gem 'mailjet'
+gem 'letter_opener'
+
 group :development do
-  gem 'rubocop'
+  gem 'web-console'
+  gem 'listen', '~> 3.0.5'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors'
   gem 'capistrano', '~> 3.0.1'
   gem 'capistrano-bundler'
@@ -52,7 +50,9 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'erb2haml'
 end
+
 group :development, :test do
+  gem 'byebug', platform: :mri
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'pry-rails'
@@ -60,6 +60,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop'
 end
+
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
