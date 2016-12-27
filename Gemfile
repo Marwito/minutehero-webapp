@@ -26,6 +26,7 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'haml-rails'
 gem 'high_voltage'
+gem 'figaro'
 gem 'pg'
 gem 'pundit'
 gem 'therubyracer', :platform=>:ruby

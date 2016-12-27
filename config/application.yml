@@ -1,0 +1,6 @@
+admin_name: Admin User
+admin_email: admin@minutehero.com
+admin_password: m1nher0
+
+domain_name: example.com
+secret_key_base: 76d92e34d33ad897f8e9d3e5fe047768e0c73440aa02d2c232f5bc45f6e8c2fefaf1a2ec6f005ac051f5d5a2881bf5217a30ae7f989d0d2dcbb69b9a05a5d41f

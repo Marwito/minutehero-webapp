@@ -1,33 +1,27 @@
-Www
+MinuteHero WWW
 ================
-
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
-
-Rails Composer is supported by developers who purchase our RailsApps tutorials.
-
-Problems? Issues?
------------
-
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
-
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
-
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
-
-Ruby on Rails
--------------
 
 This application requires:
 
 - Ruby 2.3.1
 - Rails 5.0.0.1
 
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
-
 Getting Started
 ---------------
+
+Using [RVM](http://blog.lebrijo.com/install-rvm-in-your-ubuntu-desktop/) to define ruby version and gemset:
+ 
+1. bundle install
+1. Provide PostgreSQL config in `config/database.yml` file. You have `config/database.example.yml` as example
+1. rake db:drop
+1. rake db:create
+1. rake db:migrate
+1. rake db:seed
+1. guard
+
+Admin account by default: 
+* admin_email: admin@minutehero.com
+* admin_password: m1nher0
 
 Documentation and Support
 -------------------------
