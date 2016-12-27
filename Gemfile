@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.3.1'
-#ruby-gemset=minutehero-www
+# ruby-gemset=minutehero-www
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
@@ -29,7 +29,7 @@ gem 'high_voltage'
 gem 'figaro'
 gem 'pg'
 gem 'pundit'
-gem 'therubyracer', :platform=>:ruby
+gem 'therubyracer', platform: :ruby
 gem 'thin'
 group :development do
   gem 'rubocop'
@@ -46,9 +46,9 @@ group :development do
   gem 'guard-rubocop'
   gem 'html2haml'
   gem 'rails_layout'
-  gem 'rb-fchange', :require=>false
-  gem 'rb-fsevent', :require=>false
-  gem 'rb-inotify', :require=>false
+  gem 'rb-fchange', require: false
+  gem 'rb-fsevent', require: false
+  gem 'rb-inotify', require: false
   gem 'spring-commands-rspec'
   gem 'erb2haml'
 end

@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class UserDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -33,7 +33,7 @@ class UserDashboard < Administrate::BaseDashboard
     invitation_sent_at: Field::DateTime,
     invitation_accepted_at: Field::DateTime,
     invitation_limit: Field::Number,
-    invitations_count: Field::Number,
+    invitations_count: Field::Number
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -45,7 +45,7 @@ class UserDashboard < Administrate::BaseDashboard
     :invited_by,
     :id,
     :email,
-    :encrypted_password,
+    :encrypted_password
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -76,7 +76,7 @@ class UserDashboard < Administrate::BaseDashboard
     :invitation_sent_at,
     :invitation_accepted_at,
     :invitation_limit,
-    :invitations_count,
+    :invitations_count
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -105,7 +105,7 @@ class UserDashboard < Administrate::BaseDashboard
     :invitation_sent_at,
     :invitation_accepted_at,
     :invitation_limit,
-    :invitations_count,
+    :invitations_count
   ].freeze
 
   # Overwrite this method to customize how users are displayed

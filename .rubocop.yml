@@ -1,11 +1,52 @@
 AllCops:
-  Include:
+  Exclude:
+    - 'vendor/bundle/**/*'
+    - 'config/**/*'
+    - 'lib/**/*'
+    - 'bin/**/*'
+    - 'db/schema.rb'
     - '**/Gemfile'
     - '**/Rakefile'
+    - '**/Guardfile'
+
+Documentation:
+  Enabled: false
+
+MultilineOperationIndentation:
+  Enabled: false
+
+Metrics/LineLength:
   Exclude:
-   - 'bin/*'
-   - 'db/seeds.rb'
-   - 'db/schema.rb'
-   - 'vendor/bundle/**/*'
-Rails:
-  Enabled: true
+    - 'spec/support/serializer_helpers.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/*'
+    - 'spec/**/*'
+
+Style/AlignParameters:
+  Enabled: false
+
+Style/AccessModifierIndentation:
+  Enabled: false
+
+Style/MultilineOperationIndentation:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*'
+
+Style/MultilineBlockLayout:
+  Exclude:
+    - 'spec/**/*'
+
+Style/BlockEndNewline:
+  Exclude:
+    - 'spec/**/*'
+
+Style/AlignHash:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
