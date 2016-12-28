@@ -77,6 +77,8 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
+    capistrano-bower (1.1.0)
+      capistrano (~> 3.0)
     capistrano-bundler (1.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
@@ -154,6 +156,8 @@ GEM
       pry (>= 0.9.12)
       shellany (~> 0.0)
       thor (>= 0.18.1)
+    guard-bower (0.0.1)
+      guard (~> 2.2)
     guard-bundler (2.1.0)
       bundler (~> 1.0)
       guard (~> 2.2)
@@ -416,6 +420,7 @@ DEPENDENCIES
   bourbon
   byebug
   capistrano
+  capistrano-bower
   capistrano-bundler
   capistrano-rails
   capistrano-rails-console
@@ -429,6 +434,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   figaro
+  guard-bower
   guard-bundler
   guard-livereload
   guard-rails
@@ -470,7 +476,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 2.3.1p112
+   ruby 2.3.3p222
 
 BUNDLED WITH
    1.13.7

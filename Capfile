@@ -23,6 +23,7 @@ require 'capistrano/scm/git'
 install_plugin Capistrano::SCM::Git
 require 'capistrano/bundler'
 require 'capistrano/rails/assets'
+require 'capistrano/bower'
 require 'capistrano/rails/migrations'
 require "#{File.dirname(__FILE__)}/config/application"
 require 'capistrano/prun-ops'
