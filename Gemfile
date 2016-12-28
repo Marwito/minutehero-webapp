@@ -13,6 +13,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'administrate'
 gem 'bootstrap', '~> 4.0.0.alpha3.1'
+gem 'bootstrap-glyphicons'
+gem 'tether-rails'
 gem 'bourbon'
 gem 'devise'
 gem 'devise_invitable'
