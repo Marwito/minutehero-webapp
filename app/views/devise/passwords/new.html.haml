@@ -4,6 +4,6 @@
     %p We'll send password reset instructions.
     = devise_error_messages!
     .form-group
-      = f.label :email
-      = f.email_field :email, :autofocus => true, class: 'form-control'
-    = f.submit 'Reset Password', :class => 'button right'
+      = f.email_field :email, :autofocus => true, class: 'form-control', placeholder: 'email'
+    .form-group
+      = f.submit 'Reset Password', :class => 'button right'

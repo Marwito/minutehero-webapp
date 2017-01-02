@@ -8,10 +8,14 @@
       = f.label :email
       = f.email_field :email, :autofocus => true, class: 'form-control'
     .form-group
-      - if devise_mapping.recoverable?
-        = link_to "Forgot password?", new_password_path(resource_name), class: 'right'
       = f.label :password
       = f.password_field :password, class: 'form-control'
+    .form-group
+      - if devise_mapping.recoverable?
+        = link_to "Forgot password", new_password_path(resource_name)
+      - if devise_mapping.confirmable? && controller_name != 'confirmations'
+        %br
+        = link_to "Resend confirmation instructions", new_confirmation_path(resource_name)
     = f.submit 'Sign in', :class => 'button right'
     - if devise_mapping.rememberable?
       .checkbox{:style => "width:150px"}
