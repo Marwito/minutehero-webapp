@@ -12,7 +12,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validate do
-     if password.present? && !password.match(/^(?=.*\d)(?=.*\W)/)
+    if password.present? && !password.match(/^(?=.*\d)(?=.*\W)/)
       errors.add :password, I18n.t('user.password_complexity')
     end
   end

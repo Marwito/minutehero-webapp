@@ -1,7 +1,8 @@
 Capybara.asset_host = 'http://localhost:3000'
 
-SCREENSHOT_FILE = "tmp/screenshot.png"
+# rubocop:disable Lint/Debugger
 def show
-  File.delete SCREENSHOT_FILE if File.exist? SCREENSHOT_FILE
-  system "xdg-open #{save_screenshot SCREENSHOT_FILE}"
+  filename = 'tmp/screenshot.png'
+  File.delete filename if File.exist? filename
+  system "xdg-open #{save_screenshot filename}"
 end

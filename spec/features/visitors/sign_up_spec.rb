@@ -8,10 +8,9 @@ feature 'Sign Up', :devise, js: true do
   #   When I sign up with a valid email address and password
   #   Then I see a successful sign up message
   scenario 'visitor can sign up with valid email address and password' do
-   sign_up_with('test@example.com', '1234567=', '1234567=')
-    txts = [I18n.t('devise.registrations.signed_up'),
-            I18n.t('devise.registrations.signed_up_but_unconfirmed')]
-    expect(page).to have_content(/.*#{txts[0]}.*|.*#{txts[1]}.*/)
+    sign_up_with('test@example.com', '1234567=', '1234567=')
+    expect(page).to have_current_path page_path('confirm',
+                                                email: 'test@example.com')
   end
 
   # Scenario: Visitor cannot sign up with invalid email address
@@ -57,10 +56,5 @@ feature 'Sign Up', :devise, js: true do
   scenario 'visitor cannot sign up with mismatched password and confirmation' do
     sign_up_with('test@example.com', 'please123', 'mismatch')
     expect(page).to have_content "Password confirmation doesn't match"
-  end
-
-  scenario 'visitor sign up and is redirected to confirmation page' do
-    sign_up_with('test@example.com', '1234567=', '1234567=')
-    expect(page).to have_current_path page_path('confirm')
   end
 end
