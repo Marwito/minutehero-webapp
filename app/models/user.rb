@@ -10,4 +10,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  validate do
+     if password.present? && !password.match(/^(?=.*\d)(?=.*\W)/)
+      errors.add :password, I18n.t('user.password_complexity')
+    end
+  end
 end

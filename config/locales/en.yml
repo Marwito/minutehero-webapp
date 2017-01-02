@@ -21,3 +21,5 @@
 
 en:
   hello: "Hello world"
+  user:
+    password_complexity: must contain one number and one symbol
