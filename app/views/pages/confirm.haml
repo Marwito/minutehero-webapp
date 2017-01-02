@@ -1,0 +1,19 @@
+%h3 Almost there ....
+
+%p Thank you for sign in MinuteHero!
+
+%p
+  We sent an email to your address
+  %br
+  (#{params[:email]}) to verify your account. Please
+  %br
+  click the link in the email to activate your
+  %br
+  account. Thank you.
+= button_to 'Resend confirmation instructions', '', id: 'resend', class: 'btn btn-primary'
+:coffeescript
+  $(document).ready ->
+    $('#resend').click (e)->
+      e.preventDefault()
+      $.post '#{user_confirmation_path}', {user:{email: '#{params[:email]}'}}
+      document.location = '#{request.original_url}'

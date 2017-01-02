@@ -16,4 +16,8 @@ class User < ApplicationRecord
       errors.add :password, I18n.t('user.password_complexity')
     end
   end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end
