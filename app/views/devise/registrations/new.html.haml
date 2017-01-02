@@ -17,4 +17,14 @@
     .form-group
       = f.label :password_confirmation
       = f.password_field :password_confirmation, class: 'form-control'
-    = f.submit 'Sign up', :class => 'button right'
+    .form-group
+      %label.custom-control.custom-checkbox
+        %input#conditions.custom-control-input{:type => "checkbox"}/
+        %span.custom-control-indicator
+        %span.custom-control-description I agree with MinuteHero #{link_to 'privacy policy', page_path('privacy_policy'), target: '_blank'} and #{link_to 'terms and conditions', page_path('terms_conditions'), target: '_blank'}
+        :coffeescript
+          $(document).ready ->
+            $('#conditions').change ->
+              $('#submit').prop('disabled', !$('#conditions').is(':checked'))
+
+    = f.submit 'Sign up', class: 'button right', id: 'submit', disabled: true
