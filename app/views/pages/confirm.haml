@@ -10,10 +10,13 @@
   click the link in the email to activate your
   %br
   account. Thank you.
-= button_to 'Resend confirmation instructions', '', id: 'resend', class: 'btn btn-primary'
+= link_to 'Resend confirmation instructions', '', id: 'resend', class: 'btn btn-primary'
 :coffeescript
   $(document).ready ->
     $('#resend').click (e)->
       e.preventDefault()
       $.post '#{user_confirmation_path}', {user:{email: '#{params[:email]}'}}
       document.location = '#{request.original_url}'
+%br
+%br
+= render partial: 'requests/form'

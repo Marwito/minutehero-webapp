@@ -7,6 +7,13 @@ if Rails.env.production?
 end
 require 'spec_helper'
 require 'rspec/rails'
+require 'shoulda/matchers'
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
 require 'capybara/poltergeist'
 Capybara.current_driver = :poltergeist
 Capybara.javascript_driver = :poltergeist

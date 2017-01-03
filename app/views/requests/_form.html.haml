@@ -1,0 +1,23 @@
+= link_to 'Didn\'t get it? Click here', '#', class: 'btn btn-primary', data: {toggle: 'modal', target: '#new_request'}
+
+#new_request.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal"}
+          %span ×
+        %h4.modal-title Contact us
+      = form_for Request.new do |f|
+        .modal-body
+          .form-group
+            = f.label :from
+            = f.text_field :from, value: params[:email], class: 'form-control'
+          .form-group
+            = f.label :subject
+            = f.text_field :subject, class: 'form-control'
+          .form-group
+            = f.label :content
+            = f.text_area :content, class: 'form-control', rows: 5
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal"} Close
+          = f.submit 'Send', class: 'btn btn-primary'
