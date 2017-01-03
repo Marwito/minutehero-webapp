@@ -4,6 +4,7 @@ class RequestsController < ApplicationController
     @request = Request.new(request_params)
 
     if @request.save
+      RequestMailer.create(@request).deliver
       redirect_to root_path, notice: 'Request was successfully sent.'
     end
   end
