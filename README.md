@@ -21,7 +21,7 @@ Using [RVM](http://blog.lebrijo.com/install-rvm-in-your-ubuntu-desktop/) to defi
 
 Admin account by default: 
 * admin_email: admin@minutehero.com
-* admin_password: m1nher0!
+* admin_password: minher0!
 
 Documentation and Support
 -------------------------
