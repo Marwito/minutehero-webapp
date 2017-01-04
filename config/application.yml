@@ -17,5 +17,5 @@ facebook_secret: 053b2be795205f1912c943148d3124a9
 staging:
  domain_name: staging.minutehero.net
 
- facebook_app_id: 679897015505612
- facebook_secret: 563b811e13308dd007ff2c85ebee0f64
+ facebook_app_id: 1328976287158467
+ facebook_secret: 98d04f246e4e2880c65533b7575aa89c
