@@ -28,3 +28,6 @@
               $('#submit').prop('disabled', !$('#conditions').is(':checked'))
 
     = f.submit 'Sign up', class: 'button right', id: 'submit', disabled: true
+    .clearfix
+    %hr
+    = render partial: 'devise/shared/links'
