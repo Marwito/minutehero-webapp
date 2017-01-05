@@ -14,6 +14,9 @@ linkedin_client_secret:	pgMDhaaXd9jOPdWE
 facebook_app_id: 679871518841495
 facebook_secret: 053b2be795205f1912c943148d3124a9
 
+recaptcha_site_key: 6LcGuRAUAAAAAN_g8Qyypn1onQ3bvjeXa3jIncHl
+recaptcha_secret_key: 6LcGuRAUAAAAADJunJ11TruZMnMc0pEg_dl-rxzC
+
 staging:
  domain_name: staging.minutehero.net
 

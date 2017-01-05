@@ -26,7 +26,7 @@
           $(document).ready ->
             $('#conditions').change ->
               $('#submit').prop('disabled', !$('#conditions').is(':checked'))
-
+    = recaptcha_tags
     = f.submit 'Sign up', class: 'button right', id: 'submit', disabled: true
     .clearfix
     %hr
