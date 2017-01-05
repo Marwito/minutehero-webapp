@@ -8,8 +8,8 @@ describe Identity, type: :model do
   describe '.find_for_auth' do
     let(:id) { build :identity }
     it 'should return not persisted identity if does not find it' do
-      expect{ Identity.find(uid: id.uid) }
-          .to raise_exception(ActiveRecord::RecordNotFound)
+      expect { Identity.find(uid: id.uid) }
+        .to raise_exception(ActiveRecord::RecordNotFound)
 
       expect(Identity.find_for_oauth(id).errors).not_to be_empty
     end

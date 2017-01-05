@@ -22,9 +22,9 @@ class User < ApplicationRecord
   end
 
   has_many :identities
-  TEMP_EMAIL_PREFIX = 'change@me'
-  def self.find_for_oauth(auth, signed_in_resource = nil)
 
+  # rubocop: disable AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/LineLength, Metrics/PerceivedComplexity
+  def self.find_for_oauth(auth, signed_in_resource = nil)
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)
 
@@ -39,14 +39,13 @@ class User < ApplicationRecord
       # Check if user exists by email
       email = auth.info.email
       user = User.where(email: email).first if email
-
       # Create the user if it's a new registration
       if user.nil?
         user = User.new(
-            first_name: auth.info.first_name || auth.info.name,
-            last_name: auth.info.last_name || '-',
-            email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
-            password: "#{Devise.friendly_token[0,20]}9?"
+          first_name: auth.info.first_name || auth.info.name,
+          last_name: auth.info.last_name || '-',
+          email: email || "change@me-#{auth.uid}-#{auth.provider}.com",
+          password: "#{Devise.friendly_token[0, 20]}9?"
         )
         user.skip_confirmation!
         user.save!
@@ -58,10 +57,12 @@ class User < ApplicationRecord
       identity.user = user
       identity.save!
     end
+
     user
   end
+  # rubocop: enable all
 
   def email_verified?
-    self.email #&& self.email !~ TEMP_EMAIL_REGEX
+    email # && self.email !~ TEMP_EMAIL_REGEX
   end
 end
