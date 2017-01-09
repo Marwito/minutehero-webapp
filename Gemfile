@@ -25,6 +25,8 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem 'haml-rails'
 gem 'high_voltage'
 gem 'figaro'
+gem 'simple_form'
+gem 'country_select'
 gem 'pg'
 gem 'pundit'
 gem 'therubyracer', platform: :ruby
