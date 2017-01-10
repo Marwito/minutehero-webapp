@@ -16,4 +16,6 @@
 //= require tether
 //= require bootstrap-sprockets
 //= require stringjs/dist/string.min
+//= require intl-tel-input/build/js/intlTelInput
+//= require intl-tel-input/build/js/utils
 //= require_tree .

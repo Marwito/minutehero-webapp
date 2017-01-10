@@ -23,3 +23,7 @@ en:
   hello: "Hello world"
   user:
     password_complexity: must contain one number and one symbol
+  phones:
+    errors:
+      invalid: 'Phone number should be valid'
+      twilio_fake: "The 'To' number +1555735266 is not a valid phone number."

@@ -3,7 +3,21 @@
 
   .form-inputs
     = f.input :title
-    = f.input :dial_in
+    .form-group.string
+      = label_tag :number, '* Dial in', class: 'control-label'
+      %div= text_field_tag :number, '', class: 'form-control'
+      = f.input :dial_in, as: :tel, label: false
+      :coffee
+        $('#call_dial_in').hide()
+        $('#number').intlTelInput
+          nationalMode: true
+          # just for formatting/placeholders etc
+          utilsScript: '/assets/intl-tel-input/build/js/utils.js'
+        $("#number").intlTelInput("setNumber", $('#call_dial_in').val())
+        $(document).on 'submit', '.new_call, .edit_call', (e)->
+          tel=$('#number').intlTelInput("getNumber")
+          $('#call_dial_in').val(tel)
+
     = f.input :participant_code
     = f.input :date_time
 

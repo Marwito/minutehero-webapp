@@ -28,6 +28,7 @@ gem 'high_voltage'
 gem 'figaro'
 gem 'simple_form'
 gem 'country_select'
+gem 'phonie'
 gem 'pg'
 gem 'pundit'
 gem 'therubyracer', platform: :ruby

@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "stringjs": "latest"
+    "stringjs": "latest",
+    "intl-tel-input": "10.0.4"
   }
 }
