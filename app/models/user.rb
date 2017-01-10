@@ -17,6 +17,7 @@ class User < ApplicationRecord
     end
   end
 
+  delegate :to_s, to: :name
   def name
     "#{first_name} #{last_name}"
   end

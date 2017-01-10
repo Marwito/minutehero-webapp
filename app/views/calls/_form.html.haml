@@ -1,0 +1,11 @@
+= simple_form_for(@call) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :dial_in
+    = f.input :participant_code
+    = f.input :date_time
+
+  .form-actions
+    = f.button :submit

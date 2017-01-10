@@ -1,0 +1,22 @@
+.row
+  .col-md-12
+    %p#notice= notice
+
+    %p
+      %b Title:
+      = @call.title
+    %p
+      %b Dial in:
+      = @call.dial_in
+    %p
+      %b Participant code:
+      = @call.participant_code
+    %p
+      %b Date time:
+      = @call.date_time
+    %p
+      %b User:
+      = @call.user
+
+    = link_to 'Edit', edit_call_path(@call), class: 'btn btn-info'
+    = link_to 'List', calls_path, class: 'btn btn-info'

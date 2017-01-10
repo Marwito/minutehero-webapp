@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :calls
   resources :requests, only: [:create]
   namespace :admin do
     resources :users

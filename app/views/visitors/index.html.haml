@@ -9,7 +9,7 @@
       %i.fa.fa-clock-o
       %span.align-top Your most recent Call
   .col-md-4
-    = link_to '#', class: 'btn btn-info btn-block' do
+    = link_to calls_path, class: 'btn btn-info btn-block' do
       %i.fa.fa-database
       %span.align-top Manage Calls
   .col-md-4
@@ -21,4 +21,4 @@
       %i.fa.fa-question-circle
       %span.align-top Help & FAQ
   .col-md-12
-    = link_to 'Schedule a call via our web interface', '#', class: 'pull-right'
+    = link_to 'Schedule a call via our web interface', new_call_path, class: 'pull-right'

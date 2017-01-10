@@ -1,0 +1,34 @@
+.row
+  .col-md-12
+    %h3 Manage calls
+    - if @calls.any?
+      %table.table.table-striped.table-hover.table-responsive
+        %thead.thead-default
+          %tr
+            %th Title
+            %th Dial in
+            %th Participant code
+            %th Date time
+            %th User
+            %th Actions
+
+        %tbody
+          - @calls.each do |call|
+            %tr
+              %td= call.title
+              %td= call.dial_in
+              %td= call.participant_code
+              %td= call.date_time
+              %td= call.user
+              %td
+                = link_to call, class: 'btn btn-primary btn-sm', title: 'Show' do
+                  %i.fa.fa-eye
+                = link_to edit_call_path(call), class: 'btn btn-primary btn-sm', title: 'Edit' do
+                  %i.fa.fa-pencil
+                = link_to call, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Destroy' do
+                  %i.fa.fa-trash
+    - else
+      %p No calls scheduled yet.
+    %br
+
+    = link_to 'Schedule Call', new_call_path, class: 'btn btn-info pull-right'
