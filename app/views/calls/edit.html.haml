@@ -4,5 +4,5 @@
 
     = render 'form'
     %br
-    = link_to 'Show', @call, class: 'btn btn-info'
+    = link_to 'Show', @call, class: 'btn btn-info' if policy(@call).show?
     = link_to 'List', calls_path, class: 'btn btn-info'

@@ -18,5 +18,5 @@
       %b User:
       = @call.user
 
-    = link_to 'Edit', edit_call_path(@call), class: 'btn btn-info'
+    = link_to 'Edit', edit_call_path(@call), class: 'btn btn-info' if policy(@call).edit?
     = link_to 'List', calls_path, class: 'btn btn-info'

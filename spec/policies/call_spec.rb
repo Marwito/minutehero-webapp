@@ -1,0 +1,48 @@
+describe CallPolicy do
+  subject { CallPolicy }
+
+  let(:admin) { create :user, :admin }
+  let(:u1)  { create :user  }
+  let(:u2)  { create :user  }
+
+  let!(:c1) { create :call, user: u1 }
+  let!(:c2) { create :call, user: u2 }
+
+  describe :scope do
+    it 'owned calls for :user' do
+      policy_scope = CallPolicy::Scope.new(u1, Call).resolve
+      expect(policy_scope).to eq [c1]
+      policy_scope = CallPolicy::Scope.new(admin, Call).resolve
+      expect(policy_scope).to match_array [c1, c2]
+    end
+  end
+
+  permissions :index? do
+    it 'grant access for all roles' do
+      expect(subject).to permit(u1)
+      expect(subject).to permit(admin)
+    end
+  end
+
+  [:show?, :update?, :destroy?].each do |action|
+    permissions action do
+      it 'grant access to owned calls for :user' do
+        expect(subject).to permit(u1, c1)
+        expect(subject).not_to permit(u2, c1)
+        expect(subject).not_to permit(u1, c2)
+        expect(subject).to permit(u2, c2)
+      end
+      it 'grant access to all calls for :admin' do
+        expect(subject).to permit(admin, c1)
+        expect(subject).to permit(admin, c2)
+      end
+    end
+  end
+
+  permissions :create? do
+    it 'grant access for all roles' do
+      expect(subject).to permit(u1)
+      expect(subject).to permit(admin)
+    end
+  end
+end

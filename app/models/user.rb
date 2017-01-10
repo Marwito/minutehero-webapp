@@ -23,6 +23,7 @@ class User < ApplicationRecord
   end
 
   has_many :identities
+  has_many :calls
 
   # rubocop: disable AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/LineLength, Metrics/PerceivedComplexity
   def self.find_for_oauth(auth, signed_in_resource = nil)

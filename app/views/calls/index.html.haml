@@ -21,14 +21,17 @@
               %td= call.date_time
               %td= call.user
               %td
-                = link_to call, class: 'btn btn-primary btn-sm', title: 'Show' do
-                  %i.fa.fa-eye
-                = link_to edit_call_path(call), class: 'btn btn-primary btn-sm', title: 'Edit' do
-                  %i.fa.fa-pencil
-                = link_to call, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Destroy' do
-                  %i.fa.fa-trash
+                - if policy(call).show?
+                  = link_to call, class: 'btn btn-primary btn-sm', title: 'Show' do
+                    %i.fa.fa-eye
+                - if policy(call).edit?
+                  = link_to edit_call_path(call), class: 'btn btn-primary btn-sm', title: 'Edit' do
+                    %i.fa.fa-pencil
+                - if policy(call).destroy?
+                  = link_to call, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Destroy' do
+                    %i.fa.fa-trash
     - else
       %p No calls scheduled yet.
-    %br
-
-    = link_to 'Schedule Call', new_call_path, class: 'btn btn-info pull-right'
+    - if policy(Call).create?
+      %br
+      = link_to 'Schedule Call', new_call_path, class: 'btn btn-info pull-right'

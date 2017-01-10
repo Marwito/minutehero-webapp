@@ -1,6 +1,7 @@
 class CallsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_call, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_calls, only: [:index, :new, :create]
 
   # GET /calls
   def index
@@ -48,10 +49,15 @@ class CallsController < ApplicationController
 
   def set_call
     @call = Call.find(params[:id])
+    authorize @call
   end
 
   def call_params
     params.require(:call).permit(:title, :dial_in, :participant_code,
                                  :date_time, :time_zone, :user_id)
+  end
+
+  def authorize_calls
+    authorize Call
   end
 end

@@ -3,7 +3,7 @@ FactoryGirl.define do
     confirmed_at Time.now
     first_name 'Test'
     last_name 'User'
-    email 'test@example.com'
+    sequence(:email) { |n| "test#{n}@example.com" }
     password '1234567='
 
     trait :admin do
