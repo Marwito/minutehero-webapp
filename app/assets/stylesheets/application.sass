@@ -5,12 +5,14 @@
 
 // import the CSS framework
 // Do not use *= require in Sass or your other stylesheets will not be able to access the Bootstrap mixins and variables.
-@import bootstrap
-@import font-awesome-sprockets
-@import font-awesome
-@import intl-tel-input/build/css/intlTelInput
+@import 'bootstrap'
+@import 'bootstrap/glyphicons'
+@import 'font-awesome-sprockets'
+@import 'font-awesome'
+@import 'intl-tel-input/build/css/intlTelInput'
 .iti-flag 
   background-image: image-url('intl-tel-input/build/img/flags.png')
+@import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min'
   
 // make all images responsive by default
 img 

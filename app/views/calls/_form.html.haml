@@ -19,7 +19,13 @@
           $('#call_dial_in').val(tel)
 
     = f.input :participant_code
-    = f.input :date_time
+    = f.input :date_time, as: :string, input_html: { value: (@call.date_time.strftime("%d/%m/%Y %H:%M") if @call.date_time) }
+    :coffee
+      $('#call_date_time').datetimepicker({
+        showClose: true,
+        sideBySide: true,
+        format: 'DD/MM/YYYY HH:mm'
+      });
 
   .form-actions
     = f.button :submit

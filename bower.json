@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "stringjs": "latest",
-    "intl-tel-input": "10.0.4"
+    "intl-tel-input": "10.0.4",
+    "eonasdan-bootstrap-datetimepicker": "latest"
   }
 }

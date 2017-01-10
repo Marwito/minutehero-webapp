@@ -8,8 +8,7 @@ class CallsController < ApplicationController
   end
 
   # GET /calls/1
-  def show
-  end
+  def show; end
 
   # GET /calls/new
   def new
@@ -17,8 +16,7 @@ class CallsController < ApplicationController
   end
 
   # GET /calls/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /calls
   def create
@@ -47,13 +45,13 @@ class CallsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_call
-      @call = Call.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def call_params
-      params.require(:call).permit(:title, :dial_in, :participant_code, :date_time, :user_id)
-    end
+  def set_call
+    @call = Call.find(params[:id])
+  end
+
+  def call_params
+    params.require(:call).permit(:title, :dial_in, :participant_code,
+                                 :date_time, :user_id)
+  end
 end

@@ -20,7 +20,8 @@ class PhoneNormalizer
   #   lookup_client = Twilio::REST::LookupsClient.new
   #   begin
   #     response = lookup_client.phone_numbers.get(normalize)
-  #     response.phone_number # if invalid, throws an exception. If valid, no problems.
+  #     # if invalid, throws an exception. If valid, no problems.
+  #     response.phone_number
   #     return true
   #   rescue => e
   #     @error = if e.code == 20_404

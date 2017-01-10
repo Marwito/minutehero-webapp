@@ -1,6 +1,6 @@
 describe Call, type: :model do
   let(:user) { create :user }
-  let(:call)         { create :call, user: user }
+  let(:call) { create :call, user: user }
 
   it { should belong_to :user }
   it { should validate_presence_of :dial_in }
