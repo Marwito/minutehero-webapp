@@ -52,6 +52,6 @@ class CallsController < ApplicationController
 
   def call_params
     params.require(:call).permit(:title, :dial_in, :participant_code,
-                                 :date_time, :user_id)
+                                 :date_time, :time_zone, :user_id)
   end
 end

@@ -27,5 +27,6 @@
         format: 'DD/MM/YYYY HH:mm'
       });
 
+    = f.input :time_zone, selected: (current_user.time_zone unless @call.time_zone)
   .form-actions
-    = f.button :submit
+    = f.button :submit, 'Schedule Call'
