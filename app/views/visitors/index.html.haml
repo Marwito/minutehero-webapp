@@ -5,7 +5,7 @@
       To add MinuteHero to a call, just send a
       calendar invite to #{mail_to 'MinuteHero@MinuteHero.net'}
   .col-md-12
-    = link_to '#', class: 'btn btn-block btn-primary main ' do
+    = link_to current_user.calls.most_recent_call, class: 'btn btn-block btn-primary main ' do
       %i.fa.fa-clock-o
       %span.align-top Your most recent Call
   .col-md-4

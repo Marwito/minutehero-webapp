@@ -19,6 +19,8 @@ class Call < ApplicationRecord
           wildcard_kb: "%#{keyword.to_s.downcase}%"
   }
 
+  scope :most_recent_call, ->{ where('date_time < ?', Time.now).order(:date_time).last }
+
   def past?
     Time.zone = time_zone
     Time.zone.now > date_time if date_time
