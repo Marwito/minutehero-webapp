@@ -6,7 +6,8 @@ class CallsController < ApplicationController
   # GET /calls
   def index
     @calls = CallPolicy::Scope.new(current_user, Call).resolve
-    apply_params
+    @calls = apply_order
+    @calls = @calls.quick_search(params[:q]) if params[:q]
   end
 
   # GET /calls/1
@@ -62,12 +63,11 @@ class CallsController < ApplicationController
     authorize Call
   end
 
-  def apply_params
+  def apply_order
     if params[:column] && params[:sort]
-      @calls = @calls.order("#{params[:column]} #{params[:sort]}")
+      @calls.order("#{params[:column]} #{params[:sort]}")
     else
-      @calls = @calls.order(date_time: :desc)
+      @calls.order(date_time: :desc)
     end
-    @calls = @calls.quick_search(params[:q]) if params[:q]
   end
 end
