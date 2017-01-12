@@ -6,8 +6,12 @@ class CallsController < ApplicationController
   # GET /calls
   def index
     @calls = CallPolicy::Scope.new(current_user, Call).resolve
-                              .order(date_time: :desc)
-    apply_params
+    if params[:column] && params[:sort]
+      @calls = @calls.order("#{params[:column]} #{params[:sort]}")
+    else
+      @calls = @calls.order(date_time: :desc)
+    end
+    @calls = @calls.quick_search(params[:q]) if params[:q]
   end
 
   # GET /calls/1
@@ -35,7 +39,7 @@ class CallsController < ApplicationController
   # PATCH/PUT /calls/1
   def update
     if @call.update(call_params)
-      redirect_to @call, notice: 'Call was successfully updated.'
+      redirect_to calls_path, notice: 'Call was successfully updated.'
     else
       render :edit
     end
