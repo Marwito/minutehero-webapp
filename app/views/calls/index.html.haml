@@ -3,7 +3,7 @@
     %h3 Manage calls
     .row
       .col-md-4
-        = form_tag url: calls_path(request.query_parameters), method: :get, class: 'search-form' do
+        = form_tag calls_path(request.query_parameters), method: :get, class: 'search-form' do
           .input-group
             .input-group-addon
               = icon 'search'
