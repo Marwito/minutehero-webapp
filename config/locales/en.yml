@@ -20,10 +20,21 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  date:
+    formats:
+      default: "%b %d, %Y"
+      short: "%b %d"
+      long: "%B %d, %Y"
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
   user:
     password_complexity: must contain one number and one symbol
   phones:
     errors:
       invalid: 'Phone number should be valid'
       twilio_fake: "The 'To' number +1555735266 is not a valid phone number."
+  call:
+    errors:
+      date_time:
+        past: 'Time cannot be in the past.'

@@ -8,4 +8,19 @@ class Call < ApplicationRecord
       errors.add(:dial_in, normalizer.error)
     end
   end
+
+  validate do
+    errors.add :date_time, I18n.t('call.errors.date_time.past') if past?
+  end
+
+  scope :quick_search, lambda { |keyword|
+    where 'lower(title) like :wildcard_kb OR ' \
+          'lower(participant_code) like :wildcard_kb',
+          wildcard_kb: "%#{keyword.to_s.downcase}%"
+  }
+
+  def past?
+    Time.zone = time_zone
+    Time.zone.now > date_time if date_time
+  end
 end

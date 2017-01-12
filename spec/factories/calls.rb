@@ -3,7 +3,9 @@ FactoryGirl.define do
     title 'My Call'
     dial_in '+34915513245'
     participant_code 'CODE'
-    date_time '2017-01-10 13:24:08'
-    user nil
+    date_time { Time.now + 2.days }
+    before(:create) do |d|
+      d.user = create :user unless d.user
+    end
   end
 end

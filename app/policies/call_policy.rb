@@ -14,7 +14,7 @@ class CallPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || user.calls.include?(record)
+    admin_or_owned? && record.past?
   end
 
   def create?
@@ -22,10 +22,16 @@ class CallPolicy < ApplicationPolicy
   end
 
   def update?
-    show?
+    admin_or_owned? && !record.past?
   end
 
   def destroy?
-    show?
+    admin_or_owned?
+  end
+
+  private
+
+  def admin_or_owned?
+    user.admin? || user.calls.include?(record)
   end
 end

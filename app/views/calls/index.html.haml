@@ -1,35 +1,44 @@
 .row
   .col-md-12
     %h3 Manage calls
+    .row
+      .col-md-4
+        = form_tag url: calls_path(request.query_parameters), method: :get, class: 'search-form' do
+          .input-group
+            .input-group-addon
+              = icon 'search'
+            = text_field_tag :q, params[:q], class: 'form-control', id: 'q', type: 'search'
+
+    %br
     - if @calls.any?
-      %table.table.table-striped.table-hover
+      %table.table.table-hover
         %thead.thead-default
           %tr
-            %th Title
+            %th= sort_column_by 'Title', :title
+            %th= sort_column_by 'Date time', :date_time
+            %th Time zone
             %th Dial in
-            %th Participant code
-            %th Date time
-            %th User
+            %th Code
             %th Actions
 
         %tbody
           - @calls.each do |call|
-            %tr
+            %tr{class: "#{'past-call' if call.past?}"}
               %td= call.title
+              %td= l call.date_time
+              %td= call.time_zone
               %td= call.dial_in
               %td= call.participant_code
-              %td= call.date_time
-              %td= call.user
               %td
                 - if policy(call).show?
-                  = link_to call, class: 'btn btn-primary btn-sm', title: 'Show' do
+                  = link_to call, class: 'btn btn-primary btn-sm', title: 'Details' do
                     %i.fa.fa-eye
                 - if policy(call).edit?
                   = link_to edit_call_path(call), class: 'btn btn-primary btn-sm', title: 'Edit' do
                     %i.fa.fa-pencil
                 - if policy(call).destroy?
                   = link_to call, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Destroy' do
-                    %i.fa.fa-trash
+                    %i.fa.fa-times
     - else
       %p No calls scheduled yet.
     - if policy(Call).create?

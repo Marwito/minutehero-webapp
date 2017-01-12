@@ -5,7 +5,9 @@ class CallsController < ApplicationController
 
   # GET /calls
   def index
-    @calls = Call.all
+    @calls = CallPolicy::Scope.new(current_user, Call).resolve
+                              .order(date_time: :desc)
+    apply_params
   end
 
   # GET /calls/1
@@ -24,7 +26,7 @@ class CallsController < ApplicationController
     @call = Call.new call_params.merge(user: current_user)
 
     if @call.save
-      redirect_to @call, notice: 'Call was successfully created.'
+      redirect_to calls_path, notice: 'Call was successfully created.'
     else
       render :new
     end
@@ -59,5 +61,12 @@ class CallsController < ApplicationController
 
   def authorize_calls
     authorize Call
+  end
+
+  def apply_params
+    if params[:column] && params[:sort]
+      @calls = @calls.order("#{params[:column]} #{params[:sort]}")
+    end
+    @calls = @calls.quick_search(params[:q]) if params[:q]
   end
 end

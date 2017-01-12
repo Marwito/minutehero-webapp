@@ -24,7 +24,7 @@ describe CallPolicy do
     end
   end
 
-  [:show?, :update?, :destroy?].each do |action|
+  [:update?, :destroy?].each do |action|
     permissions action do
       it 'grant access to owned calls for :user' do
         expect(subject).to permit(u1, c1)
@@ -36,6 +36,36 @@ describe CallPolicy do
         expect(subject).to permit(admin, c1)
         expect(subject).to permit(admin, c2)
       end
+    end
+  end
+
+  permissions :update? do
+    it 'grant access calls in the future' do
+      expect(subject).to permit(u1, c1)
+      c1.date_time = 2.days.ago
+      expect(subject).not_to permit(u1, c1)
+    end
+  end
+
+  permissions :show? do
+    before do
+      c1.date_time = 2.days.ago
+      c2.date_time = 2.days.ago
+    end
+    it 'grant access to owned calls for :user' do
+      expect(subject).to permit(u1, c1)
+      expect(subject).not_to permit(u2, c1)
+      expect(subject).not_to permit(u1, c2)
+      expect(subject).to permit(u2, c2)
+    end
+    it 'grant access to all calls for :admin' do
+      expect(subject).to permit(admin, c1)
+      expect(subject).to permit(admin, c2)
+    end
+    it 'grant access if call is in the past' do
+      expect(subject).to permit(u1, c1)
+      c1.date_time = Time.now + 2.days
+      expect(subject).not_to permit(u1, c1)
     end
   end
 

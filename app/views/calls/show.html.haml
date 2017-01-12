@@ -1,22 +1,68 @@
 .row
   .col-md-12
+    %h3
+      Call Details
+      %span.small.grey (Call ID #{@call.id})
     %p#notice= notice
 
-    %p
-      %b Title:
-      = @call.title
-    %p
-      %b Dial in:
-      = @call.dial_in
-    %p
-      %b Participant code:
-      = @call.participant_code
-    %p
-      %b Date time:
-      = @call.date_time
-    %p
-      %b User:
-      = @call.user
+    .row
+      .col-md-3
+        %b Title
+      .col-md-3
+        = @call.title
+    - if current_user.admin?
+      .row
+        .col-md-3
+          %b User
+        .col-md-3
+          = @call.user
+    .row
+      .col-md-3
+        %b Dial in
+      .col-md-3
+        = @call.dial_in
+    .row
+      .col-md-3
+        %b Participant code
+      .col-md-3
+        = @call.participant_code
+    .row
+      .col-md-3
+        %b Date
+      .col-md-3
+        = l @call.date_time.to_date
+    .row
+      .col-md-3
+        %b Time
+      .col-md-3
+        = @call.date_time.strftime("%H:%M")
+    .row
+      .col-md-3
+        %b Time Zone
+      .col-md-3
+        = @call.time_zone
+    - if @call.past?
+      .row
+        .col-md-3
+          %b Duration
+        .col-md-3
+          0h : 57 min :31 sec
+      .row
+        .col-md-3
+          %b Output files
+        .col-md-3
+          = link_to '' do
+            %i.fa.fa-file-pdf-o
+            PDF Minutes
+          %br
+          = link_to '' do
+            %i.fa.fa-file-text-o
+            Doc Minutes
+          %br
+          = link_to '' do
+            %i.fa.fa-file-audio-o
+            Audio Recording
 
-    = link_to 'Edit', edit_call_path(@call), class: 'btn btn-info' if policy(@call).edit?
-    = link_to 'List', calls_path, class: 'btn btn-info'
+    - if policy(@call).edit?
+      = link_to 'Edit', edit_call_path(@call), class: 'btn btn-info'
+    = render partial: 'buttons'
