@@ -19,7 +19,7 @@ class Call < ApplicationRecord
           wildcard_kb: "%#{keyword.to_s.downcase}%"
   }
 
-  scope :most_recent_call, ->{ where('date_time < ?', Time.now).order(:date_time).last }
+  scope :most_recent, ->{ where('date_time < ?', Time.now).order(:date_time) }
 
   def past?
     Time.zone = time_zone
