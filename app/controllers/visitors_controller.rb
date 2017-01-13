@@ -1,6 +1,9 @@
 class VisitorsController < ApplicationController
   def index
-    @most_recent_calls = current_user.calls.most_recent
-    render 'pages/home' unless user_signed_in?
+    if user_signed_in?
+      @most_recent_calls = current_user.calls.most_recent
+    else
+      render 'pages/home'
+    end
   end
 end

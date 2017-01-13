@@ -4,6 +4,13 @@ class ApplicationController < ActionController::Base
 
   include Pundit
 
+  protected
+
+  def authenticate_inviter!
+    redirect_to root_url, alert: "Access Denied" unless current_user.admin?
+    super
+  end
+
   private
 
   def configure_permitted_parameters
@@ -12,5 +19,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer
       .permit(:account_update, keys: [:first_name, :last_name, :company,
                                       :country, :time_zone])
+
+    devise_parameter_sanitizer.permit(:invite, keys: [:first_name,
+                                                                 :last_name])
   end
 end
