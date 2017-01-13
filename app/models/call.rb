@@ -13,11 +13,8 @@ class Call < ApplicationRecord
     errors.add :date_time, I18n.t('call.errors.date_time.past') if past?
   end
 
-  scope :quick_search, lambda { |keyword|
-    where 'lower(title) like :wildcard_kb OR ' \
-          'lower(participant_code) like :wildcard_kb',
-          wildcard_kb: "%#{keyword.to_s.downcase}%"
-  }
+  include TableFilters
+  columns_filtered :title, :participant_code
 
   scope :most_recent, ->{ where('date_time < ?', Time.now).order(:date_time) }
 

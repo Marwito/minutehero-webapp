@@ -1,9 +1,28 @@
-.container
-  .row
-    %h3 Users
-    .column
-      %table.table
-        %tbody
-          - @users.each do |user|
-            %tr
-              = render user
+.row
+  .col-md-12
+    %h3 Manage users
+    .row
+      .col-md-4
+        = form_tag users_path(request.query_parameters), method: :get, class: 'search-form' do
+          .input-group
+            .input-group-addon
+              = icon 'search'
+            = text_field_tag :q, params[:q], class: 'form-control', id: 'q', type: 'search'
+
+    %br
+    %table.table.table-hover
+      %thead.thead-default
+        %tr
+          %th= sort_column_by :email
+          %th ID
+          %th= sort_column_by :first_name
+          %th= sort_column_by :last_name
+          %th= sort_column_by :company
+          %th= sort_column_by :country
+          %th= sort_column_by :created_at
+          %th Calls
+          %th Status
+      %tbody
+        - @users.each do |user|
+          %tr
+            = render user

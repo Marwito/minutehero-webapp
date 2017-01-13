@@ -17,6 +17,9 @@ class User < ApplicationRecord
     end
   end
 
+  include TableFilters
+  columns_filtered :email, :first_name, :last_name, :company, :country
+
   delegate :to_s, to: :name
   def name
     "#{first_name} #{last_name}"

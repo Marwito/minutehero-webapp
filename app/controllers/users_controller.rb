@@ -3,8 +3,9 @@ class UsersController < ApplicationController
   after_action :verify_authorized
 
   def index
-    @users = User.all
     authorize User
+    @users = User.all
+    @users = @users.table_filters params, 'email'
   end
 
   def show
