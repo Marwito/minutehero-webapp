@@ -1,5 +1,5 @@
 module ApplicationHelper
-  # rubocop:disable MethodLength
+  # rubocop:disable MethodLength, AbcSize
   def sort_column_by(column)
     # initialize values
     sort = :desc
