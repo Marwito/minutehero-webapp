@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  after_action :verify_authorized
+  after_action :verify_authorized, except: [:bulk]
 
   def index
     authorize User
@@ -30,9 +30,20 @@ class UsersController < ApplicationController
     redirect_to users_path, notice: 'User deleted.'
   end
 
+  def bulk
+    @users = User.find bulk_params[:ids]
+    @users.each { |u| u.send bulk_params[:action] }
+    redirect_to users_path,
+                notice: "Users succsessfully #{bulk_params[:action]}."
+  end
+
   private
 
   def secure_params
     params.require(:user).permit(:role)
+  end
+
+  def bulk_params
+    params.require(:bulk).permit(:action, ids: [])
   end
 end

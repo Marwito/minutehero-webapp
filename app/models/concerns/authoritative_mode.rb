@@ -1,11 +1,11 @@
 module AuthoritativeMode
   extend ActiveSupport::Concern
 
-  def suspend!
+  def suspend
     update_attribute :suspended, true
   end
 
-  def activate!
+  def activate
     update_attribute :suspended, false
   end
 
@@ -13,19 +13,23 @@ module AuthoritativeMode
     !suspended
   end
 
-  def block!
+  def block
     update_attribute :blocked, true
   end
 
-  def allow!
+  def allow
     update_attribute :blocked, false
   end
 
-  def unblock!
-    allow!
+  def unblock
+    allow
   end
 
   def allowed?
     !blocked
+  end
+
+  def status
+    "#{active? ? 'active' : 'suspended'} | #{allowed? ? 'allowed' : 'blocked'}"
   end
 end

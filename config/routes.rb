@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'user/registrations',
                                     sessions: 'user/sessions',
                                     omniauth_callbacks: 'omniauth_callbacks'}
-  resources :users
+  resources :users do
+    post :bulk, to: 'users#bulk', on: :collection
+  end
 end

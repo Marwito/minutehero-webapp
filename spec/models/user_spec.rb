@@ -33,26 +33,26 @@ describe User do
       expect(user).not_to be_suspended
     end
 
-    it '.suspend! to be .suspended?' do
-      user.suspend!
+    it '.suspend to be .suspended?' do
+      user.suspend
       expect(user).to be_suspended
     end
-    it '.activate! to be .active?' do
-      user.suspend!
-      user.activate!
+    it '.activate to be .active?' do
+      user.suspend
+      user.activate
       expect(user).to be_active
     end
 
-    it '.block! to be .blocked?' do
-      user.block!
+    it '.block to be .blocked?' do
+      user.block
       expect(user).to be_blocked
     end
-    it '.allow! or unblock! to be .allowed?' do
-      user.block!
-      user.allow!
+    it '.allow or unblock to be .allowed?' do
+      user.block
+      user.allow
       expect(user).to be_allowed
-      user.block!
-      user.unblock!
+      user.block
+      user.unblock
       expect(user).to be_allowed
     end
   end

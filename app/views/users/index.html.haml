@@ -8,6 +8,27 @@
             .input-group-addon
               = icon 'search'
             = text_field_tag :q, params[:q], class: 'form-control', id: 'q', type: 'search'
+      .col-md-8
+        = link_to new_user_invitation_path, class: 'btn btn-info' do
+          %i.fa.fa-user-plus
+          Add
+        - {activate: 'check', suspend: 'ban', block: 'lock', unblock: 'unlock'}. each do |k,v|
+          = link_to bulk_users_path, data: {action: k}, class: 'btn btn-info bulk' do
+            %i.fa{ class: "fa-#{v}" }
+            = k.to_s.humanize
+        = link_to bulk_users_path, data: {action: 'destroy', confirm: 'Are you sure?'}, class: 'btn btn-danger bulk' do
+          %i.fa.fa-trash
+          Delete
+        :coffee
+          $(document).on 'click', 'a.bulk', (e)->
+            e.preventDefault()
+            ids = []
+            $('.user input.form-check-input:checked').each -> ids.push($(this).data('id'))
+            if ids.length != 0
+              $.post $(this).prop('href'),
+                     bulk: { action: $(this).data('action'), ids: ids }
+            false
+
 
     %br
     %table.table.table-hover
@@ -22,7 +43,15 @@
           %th= sort_column_by :created_at
           %th Calls
           %th Status
+          %th
+            .form-check
+              %label.form-check-label
+                %input.form-check-input.check-all{type: 'checkbox', title: 'Check all'}
+                :coffee
+                  $(document).on 'click', '.check-all', ->
+                    check_all = $(this).prop 'checked'
+                    $('.form-check-input').prop 'checked', check_all
       %tbody
         - @users.each do |user|
-          %tr
+          %tr.user
             = render user
