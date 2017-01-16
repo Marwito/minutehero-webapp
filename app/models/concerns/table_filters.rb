@@ -14,7 +14,7 @@ module TableFilters
 
   module ClassMethods
     def columns_filtered(*columns)
-      clause = columns.map{|c| "lower(#{c}) like :wildcard_kb"}.join ' OR '
+      clause = columns.map { |c| "lower(#{c}) like :wildcard_kb" }.join ' OR '
       scope :quick_search, lambda { |keyword|
         where clause,
               wildcard_kb: "%#{keyword.to_s.downcase}%"

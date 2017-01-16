@@ -14,8 +14,9 @@ module ApplicationHelper
 
     # header with link
     link_to Rails.application.routes.url_helpers.send(
-        :"#{request.path[1..-1]}_path",
-        request.query_parameters.merge(column: column, sort: sort)),
+      :"#{request.path[1..-1]}_path",
+        request.query_parameters.merge(column: column, sort: sort)
+    ),
             class: 'sort-link', title: sort do
       icon icon_class, title
     end

@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
   include TableFilters
   columns_filtered :email, :first_name, :last_name, :company, :country
+  include AuthoritativeMode
 
   delegate :to_s, to: :name
   def name
