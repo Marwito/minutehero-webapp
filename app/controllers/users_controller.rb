@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   def secure_params
     params.require(:user).permit(:email, :role, :blocked, :suspended,
                                  :first_name, :last_name, :company, :country,
-                                 :time_zone)
+                                 :time_zone, :product_id)
   end
 
   def set_user

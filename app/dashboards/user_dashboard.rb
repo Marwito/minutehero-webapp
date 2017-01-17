@@ -1,4 +1,4 @@
-require 'administrate/base_dashboard'
+require "administrate/base_dashboard"
 
 class UserDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -11,6 +11,7 @@ class UserDashboard < Administrate::BaseDashboard
     invited_by: Field::Polymorphic,
     identities: Field::HasMany,
     calls: Field::HasMany,
+    product: Field::BelongsTo,
     id: Field::Number,
     email: Field::String,
     encrypted_password: Field::String,
@@ -41,7 +42,7 @@ class UserDashboard < Administrate::BaseDashboard
     company: Field::String,
     time_zone: Field::String,
     blocked: Field::Boolean,
-    suspended: Field::Boolean
+    suspended: Field::Boolean,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -53,7 +54,7 @@ class UserDashboard < Administrate::BaseDashboard
     :invited_by,
     :identities,
     :calls,
-    :id
+    :product,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -62,6 +63,7 @@ class UserDashboard < Administrate::BaseDashboard
     :invited_by,
     :identities,
     :calls,
+    :product,
     :id,
     :email,
     :encrypted_password,
@@ -92,7 +94,7 @@ class UserDashboard < Administrate::BaseDashboard
     :company,
     :time_zone,
     :blocked,
-    :suspended
+    :suspended,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -102,6 +104,7 @@ class UserDashboard < Administrate::BaseDashboard
     :invited_by,
     :identities,
     :calls,
+    :product,
     :email,
     :encrypted_password,
     :reset_password_token,
@@ -129,13 +132,13 @@ class UserDashboard < Administrate::BaseDashboard
     :company,
     :time_zone,
     :blocked,
-    :suspended
+    :suspended,
   ].freeze
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+  def display_resource(user)
+    user.name
+  end
 end

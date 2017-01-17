@@ -1,4 +1,4 @@
-require 'administrate/base_dashboard'
+require "administrate/base_dashboard"
 
 class CallDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -16,7 +16,7 @@ class CallDashboard < Administrate::BaseDashboard
     date_time: Field::DateTime,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    time_zone: Field::String
+    time_zone: Field::String,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -28,7 +28,7 @@ class CallDashboard < Administrate::BaseDashboard
     :user,
     :id,
     :title,
-    :dial_in
+    :dial_in,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -42,7 +42,7 @@ class CallDashboard < Administrate::BaseDashboard
     :date_time,
     :created_at,
     :updated_at,
-    :time_zone
+    :time_zone,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -54,7 +54,7 @@ class CallDashboard < Administrate::BaseDashboard
     :dial_in,
     :participant_code,
     :date_time,
-    :time_zone
+    :time_zone,
   ].freeze
 
   # Overwrite this method to customize how calls are displayed

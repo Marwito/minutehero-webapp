@@ -8,3 +8,10 @@ user = User.find_or_create_by!(email: ENV['admin_email']) do |u|
 end
 
 puts 'CREATED ADMIN USER: ' << user.email
+
+['free', 'Pay as you go', 'Subscription 30',
+ 'Subscription 60', 'Subscription 100'].each do |name|
+  Product.find_or_create_by! name: name
+end
+
+puts 'CREATED PRODUCTS'

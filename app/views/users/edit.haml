@@ -41,8 +41,7 @@
           .col-md-6
             = f.input :country
             = f.input :time_zone
-            %br
-            Products: TBD
+            = f.association :product
         .row
           = f.submit 'Update', class: 'btn btn-primary pull-right'
 
