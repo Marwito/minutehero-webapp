@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class UserDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -41,7 +41,7 @@ class UserDashboard < Administrate::BaseDashboard
     company: Field::String,
     time_zone: Field::String,
     blocked: Field::Boolean,
-    suspended: Field::Boolean,
+    suspended: Field::Boolean
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -53,7 +53,7 @@ class UserDashboard < Administrate::BaseDashboard
     :invited_by,
     :identities,
     :calls,
-    :id,
+    :id
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -92,7 +92,7 @@ class UserDashboard < Administrate::BaseDashboard
     :company,
     :time_zone,
     :blocked,
-    :suspended,
+    :suspended
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -129,7 +129,7 @@ class UserDashboard < Administrate::BaseDashboard
     :company,
     :time_zone,
     :blocked,
-    :suspended,
+    :suspended
   ].freeze
 
   # Overwrite this method to customize how users are displayed
