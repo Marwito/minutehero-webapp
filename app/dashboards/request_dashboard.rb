@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class RequestDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -13,7 +13,7 @@ class RequestDashboard < Administrate::BaseDashboard
     subject: Field::String,
     content: Field::Text,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -25,7 +25,7 @@ class RequestDashboard < Administrate::BaseDashboard
     :id,
     :from,
     :subject,
-    :content,
+    :content
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -36,7 +36,7 @@ class RequestDashboard < Administrate::BaseDashboard
     :subject,
     :content,
     :created_at,
-    :updated_at,
+    :updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -45,7 +45,7 @@ class RequestDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :from,
     :subject,
-    :content,
+    :content
   ].freeze
 
   # Overwrite this method to customize how requests are displayed
