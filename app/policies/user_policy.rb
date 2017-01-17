@@ -14,8 +14,12 @@ class UserPolicy
     @current_user.admin? || (@current_user == @user)
   end
 
-  def update?
+  def edit?
     @current_user.admin?
+  end
+
+  def update?
+    edit?
   end
 
   def destroy?

@@ -1,0 +1,59 @@
+#user-edit
+  .row
+    = simple_form_for @user, wrapper: :horizontal_form do |f|
+      .col-md-6
+        %h3 User Details
+        = f.error_notification
+        = f.input :email
+        .col-md-9.offset-md-3.small (confirmation will be sent on change)
+        - if @user.pending_reconfirmation?
+          %div
+            Currently waiting confirmation for: #{@user.unconfirmed_email}
+
+        .form-group
+          .col-md-3 User ID
+          .col-md-9= @user.id.to_s.rjust(10, '0')
+        = f.input :role, collection: User::ROLES, include_blank: false
+        = f.input :suspended, wrapper: :horizontal_radio_and_checkboxes
+        = f.input :blocked, wrapper: :horizontal_radio_and_checkboxes
+      .col-md-12
+        = link_to 'Delete user', @user, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger bottom pull-right'
+        = f.submit 'Update', class: 'btn btn-primary pull-right'
+
+  %ul.nav.nav-tabs
+    %li.nav-item
+      %a.nav-link.active{data:{toggle: 'tab'}, href: '#personal'} Personal Data
+    %li.nav-item
+      %a.nav-link{data:{toggle: 'tab'}, href: '#organization'} Organization
+    %li.nav-item
+      %a.nav-link{data:{toggle: 'tab'}, href: '#upcoming'} Upcoming Calls
+    %li.nav-item
+      %a.nav-link{data:{toggle: 'tab'}, href: '#past'} Past Calls
+    %li.nav-item
+      %a.nav-link{data:{toggle: 'tab'}, href: '#payment'} Payment
+  .tab-content
+    #personal.tab-pane.active
+      = simple_form_for @user, wrapper: :horizontal_form do |f|
+        .row
+          .col-md-6
+            = f.input :first_name, autofocus: true
+            = f.input :last_name
+          .col-md-6
+            = f.input :country
+            = f.input :time_zone
+            %br
+            Products: TBD
+        .row
+          = f.submit 'Update', class: 'btn btn-primary pull-right'
+
+    #organization.tab-pane
+      = simple_form_for @user, wrapper: :horizontal_form do |f|
+        .row
+          .col-md-6
+            = f.input :company
+            = f.submit 'Update', class: 'btn btn-primary pull-right'
+
+    #upcoming.tab-pane
+    #past.tab-pane
+    #payment.tab-pane
+      TBD
