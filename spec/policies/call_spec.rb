@@ -24,6 +24,19 @@ describe CallPolicy do
     end
   end
 
+  permissions :update? do
+    it 'grant access calls in the future' do
+      expect(subject).to permit(u1, c1)
+      c1.date_time = 2.days.ago
+      expect(subject).not_to permit(u1, c1)
+    end
+    it 'deny access when suspended' do
+      expect(subject).to permit(u1, c1)
+      u1.suspend
+      expect(subject).not_to permit(u1, c1)
+    end
+  end
+
   [:update?, :destroy?].each do |action|
     permissions action do
       it 'grant access to owned calls for :user' do
@@ -36,14 +49,6 @@ describe CallPolicy do
         expect(subject).to permit(admin, c1)
         expect(subject).to permit(admin, c2)
       end
-    end
-  end
-
-  permissions :update? do
-    it 'grant access calls in the future' do
-      expect(subject).to permit(u1, c1)
-      c1.date_time = 2.days.ago
-      expect(subject).not_to permit(u1, c1)
     end
   end
 
@@ -73,6 +78,11 @@ describe CallPolicy do
     it 'grant access for all roles' do
       expect(subject).to permit(u1)
       expect(subject).to permit(admin)
+    end
+    it 'deny access when suspended' do
+      expect(subject).to permit(u1, c1)
+      u1.suspend
+      expect(subject).not_to permit(u1, c1)
     end
   end
 end

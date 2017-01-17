@@ -18,11 +18,12 @@ class CallPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    user.admin? || user.active?
   end
 
   def update?
-    admin_or_owned? && !record.past?
+    user.admin? ||
+        (user.calls.include?(record) && !record.past? && user.active?)
   end
 
   def destroy?

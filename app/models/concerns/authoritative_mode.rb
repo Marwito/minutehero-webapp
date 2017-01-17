@@ -32,4 +32,12 @@ module AuthoritativeMode
   def status
     "#{active? ? 'active' : 'suspended'} | #{allowed? ? 'allowed' : 'blocked'}"
   end
+
+  def active_for_authentication?
+    super && allowed?
+  end
+
+  def inactive_message
+    allowed? ? super : 'This account was blocked by Admin'
+  end
 end
