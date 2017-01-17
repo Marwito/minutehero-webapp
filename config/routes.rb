@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :requests, only: [:create]
   namespace :admin do
     resources :users
+    resources :calls
+    resources :identities
+    resources :requests
     root to: 'users#index'
   end
   root to: 'visitors#index'

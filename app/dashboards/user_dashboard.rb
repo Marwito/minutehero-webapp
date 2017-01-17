@@ -1,4 +1,4 @@
-require 'administrate/base_dashboard'
+require "administrate/base_dashboard"
 
 class UserDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -9,6 +9,8 @@ class UserDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     invited_by: Field::Polymorphic,
+    identities: Field::HasMany,
+    calls: Field::HasMany,
     id: Field::Number,
     email: Field::String,
     encrypted_password: Field::String,
@@ -22,7 +24,6 @@ class UserDashboard < Administrate::BaseDashboard
     last_sign_in_ip: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    name: Field::String,
     confirmation_token: Field::String,
     confirmed_at: Field::DateTime,
     confirmation_sent_at: Field::DateTime,
@@ -33,7 +34,14 @@ class UserDashboard < Administrate::BaseDashboard
     invitation_sent_at: Field::DateTime,
     invitation_accepted_at: Field::DateTime,
     invitation_limit: Field::Number,
-    invitations_count: Field::Number
+    invitations_count: Field::Number,
+    first_name: Field::String,
+    last_name: Field::String,
+    country: Field::String,
+    company: Field::String,
+    time_zone: Field::String,
+    blocked: Field::Boolean,
+    suspended: Field::Boolean,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -43,15 +51,17 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :invited_by,
+    :identities,
+    :calls,
     :id,
-    :email,
-    :encrypted_password
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :invited_by,
+    :identities,
+    :calls,
     :id,
     :email,
     :encrypted_password,
@@ -65,7 +75,6 @@ class UserDashboard < Administrate::BaseDashboard
     :last_sign_in_ip,
     :created_at,
     :updated_at,
-    :name,
     :confirmation_token,
     :confirmed_at,
     :confirmation_sent_at,
@@ -76,7 +85,14 @@ class UserDashboard < Administrate::BaseDashboard
     :invitation_sent_at,
     :invitation_accepted_at,
     :invitation_limit,
-    :invitations_count
+    :invitations_count,
+    :first_name,
+    :last_name,
+    :country,
+    :company,
+    :time_zone,
+    :blocked,
+    :suspended,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -84,6 +100,8 @@ class UserDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :invited_by,
+    :identities,
+    :calls,
     :email,
     :encrypted_password,
     :reset_password_token,
@@ -94,7 +112,6 @@ class UserDashboard < Administrate::BaseDashboard
     :last_sign_in_at,
     :current_sign_in_ip,
     :last_sign_in_ip,
-    :name,
     :confirmation_token,
     :confirmed_at,
     :confirmation_sent_at,
@@ -105,7 +122,14 @@ class UserDashboard < Administrate::BaseDashboard
     :invitation_sent_at,
     :invitation_accepted_at,
     :invitation_limit,
-    :invitations_count
+    :invitations_count,
+    :first_name,
+    :last_name,
+    :country,
+    :company,
+    :time_zone,
+    :blocked,
+    :suspended,
   ].freeze
 
   # Overwrite this method to customize how users are displayed
