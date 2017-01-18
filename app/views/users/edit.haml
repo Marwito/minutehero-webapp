@@ -53,6 +53,8 @@
             = f.submit 'Update', class: 'btn btn-primary pull-right'
 
     #upcoming.tab-pane
+      = render partial: 'calls/index', locals: { calls: @user.calls.upcoming }
     #past.tab-pane
+      = render partial: 'calls/index', locals: { calls: @user.calls.past }
     #payment.tab-pane
       TBD

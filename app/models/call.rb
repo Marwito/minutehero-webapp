@@ -17,6 +17,8 @@ class Call < ApplicationRecord
   columns_filtered :title, :participant_code
 
   scope :most_recent, -> { where('date_time < ?', Time.now).order(:date_time) }
+  scope :upcoming, -> { where('date_time > ?', Time.now).order(:date_time) }
+  scope :past, -> { where('date_time < ?', Time.now).order(:date_time) }
 
   def past?
     Time.zone = time_zone

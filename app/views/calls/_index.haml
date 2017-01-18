@@ -1,0 +1,31 @@
+- if calls.any?
+  %table.table.table-hover
+    %thead.thead-default
+      %tr
+        %th Title
+        %th Date Time
+        %th Time zone
+        %th Dial in
+        %th Code
+        %th Actions
+
+    %tbody
+      - calls.each do |call|
+        %tr
+          %td= call.title
+          %td= l call.date_time
+          %td= call.time_zone
+          %td= call.dial_in
+          %td= call.participant_code
+          %td
+            - if policy(call).show?
+              = link_to call, class: 'btn btn-primary btn-sm', title: 'Details' do
+                %i.fa.fa-eye
+            - if policy(call).edit?
+              = link_to edit_call_path(call), class: 'btn btn-primary btn-sm', title: 'Edit' do
+                %i.fa.fa-pencil
+            - if policy(call).destroy?
+              = link_to call, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Destroy' do
+                %i.fa.fa-times
+- else
+  %p No calls scheduled yet.
