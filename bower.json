@@ -19,6 +19,7 @@
     "stringjs": "latest",
     "intl-tel-input": "10.0.4",
     "moment": "2.17.1",
-    "eonasdan-bootstrap-datetimepicker": "4.17.44"
+    "eonasdan-bootstrap-datetimepicker": "4.17.44",
+    "typeahead.js": "0.11.1"
   }
 }

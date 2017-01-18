@@ -15,5 +15,6 @@ Rails.application.routes.draw do
                                     omniauth_callbacks: 'omniauth_callbacks'}
   resources :users do
     post :bulk, to: 'users#bulk', on: :collection
+    get :autocomplete, on: :collection
   end
 end

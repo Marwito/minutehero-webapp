@@ -3,7 +3,47 @@
 
   .form-inputs
     - if current_user.admin?
-      = f.association :user
+      = f.input :user_id
+      %input#call_user.form-control.typeahead{value: "#{@call.user.name_email if @call.user}", onClick: 'this.select();'}
+
+      :javascript
+        $('#call_user_id').hide();
+        var engine = new Bloodhound({
+          datumTokenizer: function(d) {
+            return Bloodhound.tokenizers.whitespace(d.title);
+          },
+          queryTokenizer: Bloodhound.tokenizers.whitespace,
+          remote: {
+            url: '/users/autocomplete?q=%QUERY',
+            wildcard: '%QUERY'
+          }
+        });
+
+        $('.typeahead').typeahead(null, {
+          name: 'engine',
+          displayKey: 'name',
+          source: engine.ttAdapter()
+        });
+
+        $('.typeahead').bind('typeahead:selected', function(event, datum, name) {
+          $('#call_user_id').val(datum.id);
+        });
+
+
+
+
+
+
+
+      -#= f.association :user
+
+
+
+
+
+
+
+
     = f.input :title
     .form-group.string
       = label_tag :number, '* Dial in', class: 'control-label'

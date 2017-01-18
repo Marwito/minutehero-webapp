@@ -20,4 +20,6 @@
 //= require intl-tel-input/build/js/utils
 //= require moment/min/moment.min
 //= require eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min
+//= require typeahead.js/dist/typeahead.jquery
+//= require typeahead.js/dist/bloodhound
 //= require_tree .

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   after_action :verify_authorized, except: [:bulk]
-  before_action :set_user, except: [:index, :bulk]
+  before_action :set_user, except: [:index, :bulk, :autocomplete]
 
   def index
     authorize User
@@ -34,6 +34,11 @@ class UsersController < ApplicationController
     @users.each { |u| u.send bulk_params[:action] }
     redirect_to users_path,
                 notice: "Users succsessfully #{bulk_params[:action]}."
+  end
+
+  def autocomplete
+    authorize User
+    @users = User.quick_search params[:q]
   end
 
   private

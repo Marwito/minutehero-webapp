@@ -19,6 +19,10 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def name_email
+    "#{name} - #{email}"
+  end
+
   ROLES = %w(user admin)
   enum role: ROLES
   after_initialize :set_default_role, if: :new_record?

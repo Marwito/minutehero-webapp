@@ -6,7 +6,7 @@ describe Call, type: :model do
   it { should validate_presence_of :dial_in }
   it { should validate_presence_of :participant_code }
   it { should validate_presence_of :date_time }
-  it { should validate_presence_of :user }
+  it { should validate_presence_of :user_id }
   it 'should validate :date_time not in the past' do
     call.date_time = 2.days.ago
     expect(call).not_to be_valid

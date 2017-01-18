@@ -30,4 +30,8 @@ class UserPolicy
   def bulk?
     update?
   end
+
+  def autocomplete?
+    @current_user.admin?
+  end
 end
