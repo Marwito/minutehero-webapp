@@ -28,8 +28,6 @@ en:
   time:
     formats:
       default: "%d/%m/%Y %H:%M"
-  user:
-    password_complexity: must contain one number and one symbol
   phones:
     errors:
       invalid: 'Phone number should be valid'

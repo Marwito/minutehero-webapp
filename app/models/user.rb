@@ -4,12 +4,6 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  validate do
-    if password.present? && !password.match(/^(?=.*\d)(?=.*\W)/)
-      errors.add :password, I18n.t('user.password_complexity')
-    end
-  end
-
   include TableFilters
   columns_filtered :email, :first_name, :last_name, :company, :country
   include AuthoritativeMode

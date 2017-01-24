@@ -10,23 +10,6 @@ describe User do
     expect(@user.email).to match 'user@example.com'
   end
 
-  describe 'validate password complexity' do
-    %w(123 aaa _).each do |pwd|
-      it "'#{pwd}' not valid" do
-        user = build :user, password: pwd, password_confirmation: pwd
-        expect(user).not_to be_valid
-        expect(user.errors[:password])
-          .to include I18n.t('user.password_complexity')
-      end
-    end
-    %w(123a?678 =3albaso).each do |pwd|
-      it "'#{pwd}' valid" do
-        user = build :user, password: pwd, password_confirmation: pwd
-        expect(user).to be_valid
-      end
-    end
-  end
-
   describe 'Autharitative modes' do
     it 'should have blocked and suspended to false by default' do
       expect(user).not_to be_blocked
