@@ -15,3 +15,11 @@
         .col-md-12= breadcrumbs
       = render 'layouts/messages'
       = yield
+    %footer
+      .container
+        %p
+          = link_to 'Technology', page_path('technology')
+          |
+          = link_to 'About Us', page_path('about')
+          |
+          = link_to 'MinuteHero Website', 'http://www.minutehero.net'
