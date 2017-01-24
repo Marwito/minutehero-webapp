@@ -11,5 +11,7 @@
     %header
       = render 'layouts/navigation'
     %main{:role => "main"}
+      .row
+        .col-md-12= breadcrumbs
       = render 'layouts/messages'
       = yield
