@@ -43,7 +43,7 @@ class CallsController < ApplicationController
   # DELETE /calls/1
   def destroy
     @call.destroy
-    redirect_to calls_url, notice: 'Call was successfully destroyed.'
+    redirect_to calls_url, notice: 'Call was successfully deleted.'
   end
 
   private

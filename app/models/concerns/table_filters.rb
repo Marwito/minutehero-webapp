@@ -5,6 +5,8 @@ module TableFilters
       query = if params[:column] && params[:sort]
                 order("#{params[:column]} #{params[:sort]}")
               else
+                params[:column] = default_order.split.first
+                params[:sort] = default_order.split.second
                 order(default_order)
               end
       query = query.quick_search(params[:q]) if params[:q]

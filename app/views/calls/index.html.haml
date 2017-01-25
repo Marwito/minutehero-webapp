@@ -4,11 +4,7 @@
     %h3 Manage calls
     .row
       .col-md-4
-        = form_tag calls_path(request.query_parameters), method: :get, class: 'search-form' do
-          .input-group
-            .input-group-addon
-              = icon 'search'
-            = text_field_tag :q, params[:q], class: 'form-control', id: 'q', type: 'search'
+        = render partial: 'layouts/search_form', locals: { model: :calls }
 
     %br
     - if @calls.any?
@@ -38,10 +34,10 @@
                   = link_to edit_call_path(call), class: 'btn btn-primary btn-sm', title: 'Edit' do
                     %i.fa.fa-pencil
                 - if policy(call).destroy?
-                  = link_to call, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Destroy' do
+                  = link_to call, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Delete' do
                     %i.fa.fa-times
     - else
-      %p No calls scheduled yet.
+      %p No matching calls found.
     - if policy(Call).create?
       %br
       = link_to 'Schedule Call', new_call_path, class: 'btn btn-info pull-right'

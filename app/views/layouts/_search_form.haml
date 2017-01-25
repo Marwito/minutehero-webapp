@@ -1,0 +1,14 @@
+- path = Rails.application.routes.url_helpers.send "#{model}_path"
+- path_with_query = Rails.application.routes.url_helpers.send "#{model}_path", request.query_parameters
+
+= form_tag path_with_query, method: :get, class: 'search-form' do
+  .input-group{style: 'cursor: pointer;'}
+    .input-group-addon
+      = icon 'search'
+    :coffee
+      $(document).on 'click', '.input-group-addon', ->
+        $('.search-form').submit()
+
+    = text_field_tag :q, params[:q], class: 'form-control', id: 'q', type: 'search'
+  - if params[:q]
+    = link_to "Show All #{model.capitalize}", path, class: 'btn btn-secondary btn-sm pull-right', style: 'margin-top: 10px;'

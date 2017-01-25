@@ -4,11 +4,7 @@
     %h3 Manage users
     .row
       .col-md-4
-        = form_tag users_path(request.query_parameters), method: :get, class: 'search-form' do
-          .input-group
-            .input-group-addon
-              = icon 'search'
-            = text_field_tag :q, params[:q], class: 'form-control', id: 'q', type: 'search'
+        = render partial: 'layouts/search_form', locals: { model: :users }
       .col-md-8
         = link_to new_user_invitation_path, class: 'btn btn-info' do
           %i.fa.fa-user-plus
