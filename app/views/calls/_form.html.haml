@@ -54,7 +54,9 @@
         $('#number').intlTelInput
           nationalMode: true
           # just for formatting/placeholders etc
-          utilsScript: '/assets/intl-tel-input/build/js/utils.js'
+          utilsScript: '/assets/intl-tel-input/build/js/utils.js',
+          onlyCountries: #{Country.alpha2_codes},
+          initialCountry: "#{Country::DEFAULT_ALPHA_CODE}"
         $("#number").intlTelInput("setNumber", $('#call_dial_in').val())
         $(document).on 'submit', '.new_call, .edit_call', (e)->
           tel=$('#number').intlTelInput("getNumber")

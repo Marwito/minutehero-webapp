@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :identities
     resources :requests
     resources :products
+    resources :countries
     root to: 'users#index'
   end
   root to: 'visitors#index'
