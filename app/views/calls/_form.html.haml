@@ -29,21 +29,6 @@
           $('#call_user_id').val(datum.id);
         });
 
-
-
-
-
-
-
-      -#= f.association :user
-
-
-
-
-
-
-
-
     = f.input :title
     .form-group.string
       = label_tag :number, '* Dial in', class: 'control-label'
@@ -73,4 +58,5 @@
 
     = f.input :time_zone, selected: (current_user.time_zone unless @call.time_zone)
   .form-actions
-    = f.button :submit, 'Schedule Call'
+    = link_to 'Cancel', :back, class: 'btn btn-warning'
+    = f.button :submit, 'Schedule Call', class: 'btn-info'

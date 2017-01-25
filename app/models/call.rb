@@ -5,7 +5,7 @@ class Call < ApplicationRecord
     normalizer = PhoneNormalizer.new(attributes['dial_in'])
     if attributes['dial_in'].blank? ||
         !normalizer.valid?
-      errors.add(:dial_in, normalizer.error)
+      errors.add(:dial_in, 'Invalid phone number.')
     end
   end
 
