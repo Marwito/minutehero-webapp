@@ -5,15 +5,19 @@
     .row
       .col-md-4
         = render partial: 'layouts/search_form', locals: { model: :calls }
-
+      .col-md-8
+        - if policy(Call).create?
+          = link_to 'Schedule Call', new_call_path, class: 'btn btn-info pull-right'
     %br
     - if @calls.any?
       %table.table.table-hover
         %thead.thead-default
           %tr
+            - if current_user.admin?
+              %th= sort_column_by 'first_name', 'User'
             %th= sort_column_by :title
             %th= sort_column_by :date_time
-            %th Time zone
+            %th Time Zone
             %th Dial in
             %th Code
             %th Actions
@@ -21,6 +25,8 @@
         %tbody
           - @calls.each do |call|
             %tr{class: "#{'past-call' if call.past?}"}
+              - if current_user.admin?
+                %td= call.user.name
               %td= call.title
               %td= l call.date_time
               %td= call.time_zone
@@ -38,6 +44,3 @@
                     %i.fa.fa-times
     - else
       %p No matching calls found.
-    - if policy(Call).create?
-      %br
-      = link_to 'Schedule Call', new_call_path, class: 'btn btn-info pull-right'

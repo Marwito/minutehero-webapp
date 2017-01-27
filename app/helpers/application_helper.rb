@@ -1,10 +1,12 @@
 module ApplicationHelper
   # rubocop:disable MethodLength, AbcSize
-  def sort_column_by(column)
+  def sort_column_by(column, title = '')
     # initialize values
     sort = :desc
     icon_class = 'sort'
-    title = ActiveSupport::Inflector.humanize column
+    column_title = (title.blank?)?
+        ActiveSupport::Inflector.titleize(column) :
+        title
 
     # sort order
     if params[:column] == column.to_s
@@ -18,7 +20,7 @@ module ApplicationHelper
         request.query_parameters.merge(column: column, sort: sort)
     ),
             class: 'sort-link', title: sort do
-      icon icon_class, title
+      icon icon_class, column_title
     end
   end
 end

@@ -6,7 +6,7 @@ class CallsController < ApplicationController
   # GET /calls
   def index
     @calls = CallPolicy::Scope.new(current_user, Call).resolve
-    @calls = @calls.table_filters params, 'date_time desc'
+    @calls = @calls.joins(:user).table_filters params, 'date_time desc'
   end
 
   # GET /calls/1

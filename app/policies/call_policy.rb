@@ -22,7 +22,7 @@ class CallPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? ||
+    (user.admin? && !record.past?) ||
         (user.calls.include?(record) && !record.past? && user.active?)
   end
 

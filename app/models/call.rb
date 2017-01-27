@@ -15,7 +15,7 @@ class Call < ApplicationRecord
   end
 
   include TableFilters
-  columns_filtered :title, :participant_code
+  columns_filtered :title, :participant_code, 'users.first_name', 'users.last_name'
 
   scope :most_recent, -> { where('date_time < ?', Time.now).order(:date_time) }
   scope :upcoming, -> { where('date_time > ?', Time.now).order(:date_time) }
