@@ -1,4 +1,8 @@
-%p
+%h2
   Welcome #{@email}!
-%p You can confirm your account email through the link below:
+%p Thanks for signing up to MinuteHero.
+%p Your account is ready to be activated. We just want to make sure that you really are you. 
+%p You can confirm your account email by clicking on the link below:
 %p= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token)
+%p
+%p If you did not set up a MinuteHero account, just ignore or delete this email. No account will be created.   
