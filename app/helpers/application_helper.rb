@@ -23,4 +23,8 @@ module ApplicationHelper
       icon icon_class, column_title
     end
   end
+
+  def yesno(x)
+    x ? "Yes" : "No"
+  end
 end

@@ -22,4 +22,5 @@
 //= require eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min
 //= require typeahead.js/dist/typeahead.jquery
 //= require typeahead.js/dist/bloodhound
+//= require bootstrap-table/src/bootstrap-table
 //= require_tree .

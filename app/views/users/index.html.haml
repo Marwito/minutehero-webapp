@@ -28,18 +28,20 @@
 
 
     %br
-    %table.table.table-hover
+    %table.table.table-hover{data:{toggle: 'table'}}
       %thead.thead-default
         %tr
           %th= sort_column_by :email
-          %th ID
+          %th{data:{sortable: 'true'}} Id
           %th= sort_column_by :first_name
           %th= sort_column_by :last_name
           %th= sort_column_by :company
           %th= sort_column_by :country
+          %th= sort_column_by :role
           %th= sort_column_by :created_at
-          %th Calls
-          %th Status
+          %th{data:{sortable: 'true'}} Calls
+          %th{data:{sortable: 'true'}} Blocked
+          %th{data:{sortable: 'true'}} Suspended
           %th
             .form-check
               %label.form-check-label

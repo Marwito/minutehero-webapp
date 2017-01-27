@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
     authorize User
     @users = User.all
-    @users = @users.table_filters params, 'email asc'
+    @users = @users.table_filters(params, 'email asc')
   end
 
   def show; end

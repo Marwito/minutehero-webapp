@@ -5,9 +5,11 @@
 %td= user.last_name
 %td= user.company
 %td= user.country
+%td= user.role
 %td= user.created_at
 %td= user.calls.count
-%td= user.status
+%td= yesno user.blocked
+%td= yesno user.suspended
 %td
   .form-check
     %label.form-check-label
