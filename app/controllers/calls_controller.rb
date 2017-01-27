@@ -22,7 +22,8 @@ class CallsController < ApplicationController
 
   # POST /calls
   def create
-    @call = Call.new call_params.merge(user: current_user)
+    @call = Call.new call_params
+    @call.user = current_user unless @call.user
 
     if @call.save
       redirect_to calls_path, notice: 'Call was successfully created.'

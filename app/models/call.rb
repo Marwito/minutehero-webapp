@@ -5,7 +5,8 @@ class Call < ApplicationRecord
     # normalizer = PhoneNormalizer.new(attributes['dial_in'])
     # if attributes['dial_in'].blank? ||
     #     !normalizer.valid?
-    unless !dial_in.blank? && dial_in.length.between?(6, 15)
+    # phone number between 6 - 15
+    unless !dial_in.blank? && dial_in.length.between?(9, 18)
       errors.add(:dial_in, I18n.t('phones.errors.invalid'))
     end
   end

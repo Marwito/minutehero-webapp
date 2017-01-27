@@ -14,10 +14,20 @@ describe Call, type: :model do
     I18n.t('call.errors.date_time.past')
   end
 
-  it 'should validate if valid phone' do
-    call.dial_in = '333'
-    expect(call.valid?).to be false
-    expect(call.errors.messages[:dial_in]).to be_any
+  describe 'should validate if valid phone' do
+    %w(+49333 +4955555 +491616161616161616).each do |num|
+      it "#{num} not valid" do
+        call.dial_in = num
+        expect(call).not_to be_valid
+        expect(call.errors.messages[:dial_in]).to be_any
+      end
+    end
+    %w(+49666666 +49151515151515151).each do |num|
+      it "#{num} valid" do
+        call.dial_in = num
+        expect(call).to be_valid
+      end
+    end
   end
 
   describe '#past?' do
