@@ -4,30 +4,39 @@
   .form-inputs
     - if current_user.admin?
       = f.input :user_id
-      %input#call_user.form-control.typeahead{value: "#{@call.user.name_email if @call.user}", onClick: 'this.select();'}
+      .row
+        .col-md-5
+          %input#call_user.form-control.typeahead{value: "#{@call.user.name_email if @call.user}", onClick: 'this.select();'}
+        .col-md-7
+          = link_to '#', class: 'btn btn-danger btn-sm reset', title: 'Reset' do
+            %i.fa.fa-times
 
-      :javascript
-        $('#call_user_id').hide();
-        var engine = new Bloodhound({
-          datumTokenizer: function(d) {
-            return Bloodhound.tokenizers.whitespace(d.title);
-          },
-          queryTokenizer: Bloodhound.tokenizers.whitespace,
-          remote: {
-            url: '/users/autocomplete?q=%QUERY',
-            wildcard: '%QUERY'
-          }
-        });
+      :coffee
+        $('#call_user_id').hide()
+        engine = new Bloodhound(
+          datumTokenizer: (d) ->
+            Bloodhound.tokenizers.whitespace d.title
+          queryTokenizer: Bloodhound.tokenizers.whitespace
+          remote:
+            url: '/users/autocomplete?q=%QUERY'
+            wildcard: '%QUERY')
 
-        $('.typeahead').typeahead(null, {
-          name: 'engine',
-          displayKey: 'name',
+        $('.typeahead').typeahead null,
+          name: 'engine'
+          displayKey: 'name'
           source: engine.ttAdapter()
-        });
 
-        $('.typeahead').bind('typeahead:selected', function(event, datum, name) {
-          $('#call_user_id').val(datum.id);
-        });
+        $('.typeahead').bind 'typeahead:selected', (event, datum, name) ->
+          $('#call_user_id').val datum.id
+          $('.typeahead').prop 'readonly', true
+          $('.reset').show()
+
+        $('.reset').hide()
+        $('.reset').on 'click', (e) ->
+          $('.typeahead').prop 'readonly', false
+          $('.typeahead').val ''
+          $('#call_user_id').val ''
+          $('.reset').hide()
 
     = f.input :title
     .form-group.string
