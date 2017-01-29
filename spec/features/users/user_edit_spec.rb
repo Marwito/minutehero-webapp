@@ -34,7 +34,7 @@ feature 'User edit', :devise do
     other = create :user, email: 'other@example.com'
     login_as me, scope: :user
     visit edit_user_registration_path(other)
-    expect(page).to have_content 'Login Credentials'
+    expect(page).to have_content 'Your Account'
     expect(page).to have_field('Email', with: me.email)
   end
 end

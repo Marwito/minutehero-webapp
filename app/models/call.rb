@@ -1,6 +1,7 @@
 class Call < ApplicationRecord
   belongs_to :user
-  validates :dial_in, :participant_code, :date_time, :user_id, presence: true
+  validates :dial_in, :participant_code, :schedule_date, :schedule_time,
+            :time_zone, :user_id, presence: true
   validate do
     # normalizer = PhoneNormalizer.new(attributes['dial_in'])
     # if attributes['dial_in'].blank? ||
@@ -16,14 +17,38 @@ class Call < ApplicationRecord
   end
 
   include TableFilters
-  columns_filtered :title, :participant_code, 'users.first_name', 'users.last_name'
+  columns_filtered :title, :participant_code,
+                   'users.first_name', 'users.last_name'
 
-  scope :most_recent, -> { where('date_time < ?', Time.now).order(:date_time) }
-  scope :upcoming, -> { where('date_time > ?', Time.now).order(:date_time) }
-  scope :past, -> { where('date_time < ?', Time.now).order(:date_time) }
+  scope :most_recent, -> {
+    where('(schedule_date + schedule_time) < ?', Time.now)
+      .order(:schedule_date, :schedule_time)
+  }
+  scope :upcoming, -> {
+    where('(schedule_date + schedule_time) > ?', Time.now)
+      .order(:schedule_date, :schedule_time)
+  }
+  scope :past, -> {
+    where('(schedule_date + schedule_time) < ?', Time.now)
+      .order(:schedule_date, :schedule_time)
+  }
 
   def past?
     Time.zone = time_zone
     Time.zone.now > date_time if date_time
+  end
+
+  # rubocop:disable AbcSize
+  def date_time
+    if schedule_date && schedule_time && time_zone
+      DateTime.new(schedule_date.year, schedule_date.month, schedule_date.day,
+                   schedule_time.hour, schedule_time.min, schedule_time.sec,
+                   time_zone).to_datetime
+    end
+  end
+
+  def date_time=(value)
+    self.schedule_date = value.to_date
+    self.schedule_time = value.to_time
   end
 end

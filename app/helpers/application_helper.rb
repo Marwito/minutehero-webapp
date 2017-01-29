@@ -4,9 +4,11 @@ module ApplicationHelper
     # initialize values
     sort = :desc
     icon_class = 'sort'
-    column_title = (title.blank?)?
-        ActiveSupport::Inflector.titleize(column) :
-        title
+    column_title = if title.blank?
+                     ActiveSupport::Inflector.titleize(column)
+                   else
+                     title
+                   end
 
     # sort order
     if params[:column] == column.to_s
@@ -25,6 +27,6 @@ module ApplicationHelper
   end
 
   def yesno(x)
-    x ? "Yes" : "No"
+    x ? 'Yes' : 'No'
   end
 end

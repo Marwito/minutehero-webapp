@@ -25,9 +25,12 @@ en:
       default: "%b %d, %Y"
       short: "%b %d"
       long: "%B %d, %Y"
-  time:
+  datetime:
     formats:
       default: "%d/%m/%Y %H:%M"
+  time:
+    formats:
+      default: "%H:%M"
   phones:
     errors:
       invalid: 'Phone number should be valid'

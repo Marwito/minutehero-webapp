@@ -16,7 +16,8 @@
             - if current_user.admin?
               %th= sort_column_by 'first_name', 'User'
             %th= sort_column_by :title
-            %th= sort_column_by :date_time
+            %th= sort_column_by :schedule_date, 'Date'
+            %th Time
             %th Time Zone
             %th Dial in
             %th Code
@@ -28,7 +29,8 @@
               - if current_user.admin?
                 %td= call.user.name
               %td= call.title
-              %td= l call.date_time
+              %td= l call.schedule_date
+              %td= l call.schedule_time
               %td= call.time_zone
               %td= call.dial_in
               %td= call.participant_code

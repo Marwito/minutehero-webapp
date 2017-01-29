@@ -3,7 +3,8 @@
     %thead.thead-default
       %tr
         %th Title
-        %th Date Time
+        %th Date
+        %th Time
         %th Time zone
         %th Dial in
         %th Code
@@ -13,7 +14,8 @@
       - calls.each do |call|
         %tr
           %td= call.title
-          %td= l call.date_time
+          %td= l call.schedule_date
+          %td= l call.schedule_time
           %td= call.time_zone
           %td= call.dial_in
           %td= call.participant_code
