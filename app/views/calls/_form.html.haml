@@ -71,7 +71,7 @@
 
     .form-group
       = f.label :time_zone, required: true
-      = f.collection_select :time_zone, User::TIME_ZONES, :first, :second, {selected: (current_user.time_zone unless @call.time_zone)}, {class: 'form-control'}
+      = f.collection_select :time_zone, User::TIME_ZONES, :first, :second, {selected: (@call.time_zone ? @call.time_zone : current_user.time_zone)}, {class: 'form-control'}
 
   .form-actions
     = link_to 'Cancel', :back, class: 'btn btn-warning'

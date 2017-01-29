@@ -13,7 +13,7 @@ class Call < ApplicationRecord
   end
 
   validate do
-    errors.add :date_time, I18n.t('call.errors.date_time.past') if past?
+    errors.add :schedule_time, I18n.t('call.errors.date_time.past') if past?
   end
 
   include TableFilters
