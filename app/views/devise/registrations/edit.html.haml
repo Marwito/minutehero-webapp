@@ -14,7 +14,9 @@
       = f.input :last_name
       = f.input :company
       = f.input :country
-      = f.input :time_zone
+      .form-group
+        = f.label :time_zone
+        = f.collection_select :time_zone, User::TIME_ZONES, :first, :second, {include_blank: true}, {class: 'form-control'}
 
       = f.submit 'Update', class: 'btn btn-primary right'
 

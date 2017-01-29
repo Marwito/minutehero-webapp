@@ -24,6 +24,14 @@ class User < ApplicationRecord
     self.role ||= :user
   end
 
+  TIME_ZONES = ActiveSupport::TimeZone.all
+                                      .group_by(&:formatted_offset)
+                                      .map do |k, v|
+                                        [v.first.name,
+                                         "GMT#{k} #{v.map(&:name)
+                                                     .take(3).join(', ')}"]
+                                      end
+
   has_many :identities
   has_many :calls, dependent: :destroy
   belongs_to :product, optional: true
