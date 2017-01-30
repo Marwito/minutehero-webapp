@@ -24,6 +24,14 @@ crumb :user do |user|
   parent :users
 end
 
+crumb :pages do
+  link params[:id].titleize
+end
+
+crumb :devise do
+  link "#{params[:action].titleize} #{params[:controller].split('/').last.titleize}"
+end
+
 # crumb :project_issues do |project|
 #   link "Issues", project_issues_path(project)
 #   parent :project, project
