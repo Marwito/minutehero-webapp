@@ -7,10 +7,12 @@ sudo chmod a+x /usr/local/sbin/certbot-auto
 
 ## Create/verify certificates
 mkdir /var/www/minutehero/current/public/.well-known
-sudo certbot-auto certonly -a webroot --webroot-path=/var/www/minutehero/current/public -d staging.minutehero.net
+sudo certbot-auto certonly -a webroot --webroot-path=/var/www/minutehero/current/public -d my.minutehero.net
 
 ## Generate Strong Diffie-Hellman Group
 sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+
+sudo service nginx restart
 
 ## Crontab entry for renewal
 sudo crontab -e

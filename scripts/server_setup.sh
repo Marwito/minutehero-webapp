@@ -29,13 +29,20 @@ sudo /usr/sbin/update-rc.d -f thin defaults
 ## Rails dependencies
 sudo apt-get install -y imagemagick libmagickwand-dev
 
-## Install postgres 9.5:
+## Install postgre:
 export LANGUAGE=en_US.UTF-8
-sudo apt-get -y install postgresql libpq-dev
+#sudo apt-get -y install postgresql libpq-dev
 
-sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = 'localhost'/" /etc/postgresql/9.5/main/postgresql.conf
-sudo sed -i "s/local   all             all                                     peer/local   all             all                                     md5/" /etc/postgresql/9.5/main/pg_hba.conf
-sudo sed -i "s/ssl = true/ssl = false/" /etc/postgresql/9.5/main/postgresql.conf
+## Install postgres 9.6:
+sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install postgresql-9.6 libpq-dev
+
+
+sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = 'localhost'/" /etc/postgresql/9.6/main/postgresql.conf
+sudo sed -i "s/local   all             all                                     peer/local   all             all                                     md5/" /etc/postgresql/9.6/main/pg_hba.conf
+sudo sed -i "s/ssl = true/ssl = false/" /etc/postgresql/9.6/main/postgresql.conf
 sudo service postgresql restart
 
 ## Rewrite postgres password:
@@ -52,6 +59,7 @@ sudo service nginx restart
 
 # Nodejs/bower
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+source /home/ubuntu/.bashrc
 nvm install node
 npm install -g bower
 
@@ -61,14 +69,19 @@ sudo chown -R ubuntu:ubuntu /var/www/minutehero
 #export RAILS_ENV="staging" ; bundle exec rake db:create
 
 ## init.d script
-sudo thin config -C /etc/thin/minutehero.yml -c /var/www/minutehero/current -l log/thin.log -e staging --servers 1 --port 3000
+sudo thin config -C /etc/thin/minutehero.yml -c /var/www/minutehero/current -l log/thin.log -e production --servers 1 --port 3000
 sudo touch /etc/init.d/minutehero
 sudo chmod a+x /etc/init.d/minutehero
 sudo systemctl daemon-reload
 
+# Generating SSH key for Deployment:
+# Give public key to Github > Settings > Deploy Keys
+ssh-keygen -t rsa -b 4096 -C "admin@minutehero.net"
+
 ## Create database: in failed deployment release folder
-export RAILS_ENV="staging" ; bundle exec rake db:create
+sudo -u postgres psql -c "CREATE DATABASE minutehero;"
+#export RAILS_ENV="production" ; bundle exec rake db:create
 
 ## Deploy
-cap staging deploy
-cap staging deploy:db_seed
+cap production deploy
+cap production deploy:db_seed
