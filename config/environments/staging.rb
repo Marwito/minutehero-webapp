@@ -1,4 +1,5 @@
 Rails.application.configure do
+  OmniAuth.config.full_host = "https://#{ENV['domain_name']}"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
