@@ -22,3 +22,9 @@ staging:
 
  facebook_app_id: 1328976287158467
  facebook_secret: 98d04f246e4e2880c65533b7575aa89c
+
+production:
+ domain_name: my.minutehero.net
+
+ facebook_app_id: 1328976287158467
+ facebook_secret: 98d04f246e4e2880c65533b7575aa89c
