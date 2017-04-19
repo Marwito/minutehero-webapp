@@ -17,7 +17,7 @@ set :bundle_binstubs, nil
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :keep_releases, 5
 
-set :default_env, { path: "/home/ubuntu/.nvm/versions/node/v7.3.0/bin:$PATH" }
+set :default_env, { path: "/home/ubuntu/.nvm/versions/node/v7.3.0/bin:/home/ubuntu/.nvm/versions/node/v7.9.0/bin:$PATH" }
 
 namespace :deploy do
   # desc 'Restart application'
