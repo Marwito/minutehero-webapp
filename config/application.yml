@@ -11,8 +11,8 @@ mailjet_secret_key: 2422bac1bf4651eb6dd0053363477e6b
 linkedin_client_id:	77y16gklqckatk
 linkedin_client_secret:	pgMDhaaXd9jOPdWE
 
-facebook_app_id: 679871518841495
-facebook_secret: 053b2be795205f1912c943148d3124a9
+facebook_app_id: 1328976287158467
+facebook_secret: 9e8d2af6be96716e4c443c20e01d6cd4
 
 recaptcha_site_key: 6LcGuRAUAAAAAN_g8Qyypn1onQ3bvjeXa3jIncHl
 recaptcha_secret_key: 6LcGuRAUAAAAADJunJ11TruZMnMc0pEg_dl-rxzC
@@ -20,11 +20,5 @@ recaptcha_secret_key: 6LcGuRAUAAAAADJunJ11TruZMnMc0pEg_dl-rxzC
 staging:
  domain_name: staging.minutehero.net
 
- facebook_app_id: 1328976287158467
- facebook_secret: 98d04f246e4e2880c65533b7575aa89c
-
 production:
  domain_name: my.minutehero.net
-
- facebook_app_id: 1432958280093600
- facebook_secret: 15666a4c5cd568c85662a9e5fd9d7a86
