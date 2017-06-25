@@ -55,6 +55,9 @@ only if you already have an existent database
 ### rake db:migrate
 ### rake db:seed
 ### phantomjs
+
+Needed to run the automated regression tests using rspec:
+* sudo apt install phantomjs
 ### Email notification configuration
 
 We use AWS SES to receive email notifications from the app.
