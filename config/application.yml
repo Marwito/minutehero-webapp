@@ -8,6 +8,7 @@ secret_key_base: 76d92e34d33ad897f8e9d3e5fe047768e0c73440aa02d2c232f5bc45f6e8c2f
 mailjet_api_key: c6cd8caa8d65ae490a84ceaf438a7510
 mailjet_secret_key: 2422bac1bf4651eb6dd0053363477e6b
 
+
 linkedin_client_id:	77y16gklqckatk
 linkedin_client_secret:	pgMDhaaXd9jOPdWE
 
@@ -17,8 +18,21 @@ facebook_secret: 9e8d2af6be96716e4c443c20e01d6cd4
 recaptcha_site_key: 6LcGuRAUAAAAAN_g8Qyypn1onQ3bvjeXa3jIncHl
 recaptcha_secret_key: 6LcGuRAUAAAAADJunJ11TruZMnMc0pEg_dl-rxzC
 
+AWS_ACCESS_KEY_ID: AKIAJW3NBG4VIISXYMYQ
+AWS_SECRET_ACCESS_KEY: 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
+
+defaults: &defaults
+  domain_name: localhost:3000
+  send_call_notifications_to_email: development_invite@minutehero.net
+
+development:
+  <<: *defaults
+
 staging:
- domain_name: staging.minutehero.net
+  domain_name: staging.minutehero.net
+  send_call_notifications_to_email: staging_invite@minutehero.net
 
 production:
- domain_name: my.minutehero.net
+  domain_name: my.minutehero.net
+  end_call_notifications_to_email: invite@minutehero.net
+
