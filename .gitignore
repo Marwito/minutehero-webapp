@@ -28,10 +28,6 @@ db/*.sqlite3
 /node_modules/
 npm-debug.log
 
-# to avoid that the file application.yml gets committed
-config/application.yml  
-
-
 # various artifacts
 **.war
 *.rbc

@@ -8,7 +8,6 @@ secret_key_base: 76d92e34d33ad897f8e9d3e5fe047768e0c73440aa02d2c232f5bc45f6e8c2f
 mailjet_api_key: c6cd8caa8d65ae490a84ceaf438a7510
 mailjet_secret_key: 2422bac1bf4651eb6dd0053363477e6b
 
-
 linkedin_client_id:	77y16gklqckatk
 linkedin_client_secret:	pgMDhaaXd9jOPdWE
 
@@ -20,6 +19,7 @@ recaptcha_secret_key: 6LcGuRAUAAAAADJunJ11TruZMnMc0pEg_dl-rxzC
 
 AWS_ACCESS_KEY_ID: AKIAJW3NBG4VIISXYMYQ
 AWS_SECRET_ACCESS_KEY: 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
+aws_region: eu-west-1
 
 defaults: &defaults
   domain_name: localhost:3000

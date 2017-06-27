@@ -1,5 +1,6 @@
 MinuteHero WWW
 ================
+These instructions should work on Ubuntu 14 and 16.
 
 This application requires:
 
@@ -13,7 +14,7 @@ Setting up the development environment
 
 * \curl -sSL https://raw.githubusercontent.com/wayneeseguin/rvm/stable/binscripts/rvm-installer | sudo bash -s stable
 * source ~/.rvm/scripts/rvm # to be added to .bashrc
-* type rvm | head -n 1
+* type rvm | head -n 1 # to confirm that rvm is loaded as a function. It should output "rvm is a function". If it shows anything else, rvm isn't loading correctly.
 * rvm install 2.3.3
 
 * sudo usermod -a -G rvm $USER
@@ -23,7 +24,7 @@ Setting up the development environment
 * sudo apt-get install build-essential checkinstall
 * sudo apt-get install libssl-dev
 * curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
-nvm install 6.0
+* nvm install 6.0
 
 ### Install bower
 
@@ -34,44 +35,60 @@ nvm install 6.0
 * gem install bundler
 * bundle install
 
-### Install Postgres on Ubuntu 41.04
+### Install Postgres on Ubuntu 14.04
 
-* for other versions : https://askubuntu.com/questions/831292/how-to-install-postgresql-9-6-on-any-ubuntu-version
+* for other Ubuntu versions : https://askubuntu.com/questions/831292/how-to-install-postgresql-9-6-on-any-ubuntu-version
 
 * sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main"
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+* wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 * sudo apt-get update
 * sudo apt-get install postgresql-9.6
 * sudo apt install libpq-dev
 * sudo -u postgres psql 
-* \password
-* postgres
+* \password # to change your password
+* Enter new password: # type postgres
+* Enter it again: # confirmation
+* \q # to quit psql
 
-### rake db:drop 
+In case postgres wouldn't start, execute these commands :
 
-only if you already have an existent database
+* systemctl status postgresql # If PostgreSQL is running, you'll see output that includes the text Active: active (exited).
+If you see Active: inactive (dead), start the PostgreSQL service using the following command:
 
-### rake db:create
-### rake db:migrate
-### rake db:seed
-### phantomjs
+* systemctl start postgresql
 
-Needed to run the automated regression tests using rspec:
-* sudo apt install phantomjs
+PostgreSQL also needs to be enabled to start on reboot. Do that with this command:
+
+* systemctl enable postgresql
+
+### Install phantomjs
+
+* sudo apt install phantomjs # Needed to run the automated regression tests using rspec
+
 ### Email notification configuration
 
 We use AWS SES to receive email notifications from the app.
 
-1. Install AWS SDK for Ruby
-gem install aws-sdk
-2. Get your AWS credentials and save them respectively in the variables : AWS_ACCESS_KEY_ID and 
-AWS_SECRET_ACCESS_KEY in the file 'application.yml'
-3. You can edit the email addresses you want to receive notifications for using the variable 'send_call_notifications_to_email' in the file 'application.yml' too. 
+1. Install AWS SDK for Ruby : gem install aws-sdk
+
+2. Get your AWS credentials and save them respectively in the variables:
+   AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in the file
+   'config/application.yml'
+
+3. You can edit the email addresses you want to receive notifications for using the variable 'send_call_notifications_to_email' in the file 'config/application.yml' too. 
+
 4. Verify these email addresses with Amazon SES.
 
-### guard
+### Setup of the database
 
-To launch the web server by default.
+* rake db:drop # only if you already have an existing database
+* rake db:create
+* rake db:migrate
+* rake db:seed
+
+### Starting the web server by default
+
+* guard
 
 ### Admin account by default: 
 * admin_email: admin@minutehero.net

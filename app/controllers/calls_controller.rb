@@ -81,28 +81,24 @@ class CallsController < ApplicationController
     require 'aws-sdk'
     sender = ENV['send_call_notifications_to_email']
     recipient = ENV['send_call_notifications_to_email']
+    awsregion = ENV['aws_region']
 
-    # Replace us-west-2 with the AWS Region you're using for Amazon SES.
-    awsregion = 'eu-west-1'
     link_to_call = "<p>Click <a href='http://#{ENV['domain_name']}/calls/#{@call.id}/edit'>here</a>
        to know the exact time zone of #{@call.time_zone}.</p>"
+    common_subject = "#{@call.schedule_date} #{@call.schedule_time.strftime '%H:%M'}
+      #{@call.time_zone}, #{@call.user.first_name} #{@call.user.last_name}, #{@call.title}"
     # The subject line for the email.
     if type_of_action == :create
-      subject = "Call Scheduled: #{@call.schedule_date} #{@call.schedule_time.strftime '%H:%M'}
-      #{@call.time_zone}, #{@call.user.first_name} #{@call.user.last_name}, #{@call.title}"
+      subject = "Call Scheduled: " + common_subject
       link_to_call_in_html_body = link_to_call
     elsif type_of_action == :update
-      subject = "Call Edited: #{@call.schedule_date} #{@call.schedule_time.strftime '%H:%M'}
-      #{@call.time_zone}, #{@call.user.first_name} #{@call.user.last_name}, #{@call.title}"
+      subject = "Call Edited: " + common_subject
       link_to_call_in_html_body = link_to_call
     elsif type_of_action == :destroy
-      subject = "Call Deleted: #{@call.schedule_date} #{@call.schedule_time.strftime '%H:%M'}
-      #{@call.time_zone}, #{@call.user.first_name} #{@call.user.last_name}, #{@call.title}"
+      subject = "Call Deleted:" + common_subject
       link_to_call_in_html_body = ''
     else
-      subject = "Error in processing action of the scheduled call: #{@call.schedule_date}
-      #{@call.schedule_time.strftime '%H:%M'} #{@call.time_zone} #{@call.user.first_name}
-      #{@call.user.last_name}, #{@call.title}"
+      subject = "Error in processing action of the scheduled call: "+ common_subject
       link_to_call_in_html_body = link_to_call
     end
     # The HTML body of the email.
@@ -183,15 +179,13 @@ class CallsController < ApplicationController
             charset: encoding,
             data: subject
           },
-        }
+        },
       source: sender
                           })
-      puts 'Email sent!'
 
     # If something goes wrong, display an error message.
     rescue => e
-      print 'Email not sent. Error message: '
-      puts e
+      puts "Email not sent. Error message : #{e}"
 
     end
   end
