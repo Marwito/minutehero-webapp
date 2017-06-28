@@ -101,9 +101,89 @@ We use AWS SES to receive email notifications from the app.
 
 * guard
 
-### Admin account by default: 
+### Admin account by default:
+
 * admin_email: admin@minutehero.net
 * admin_password: minher0!
+
+Running Unit Tests
+------------------
+
+    $ rspec
+
+You need [phantomjs](http://phantomjs.org/) to run the tests.
+
+Development Workflow
+--------------------
+
+1. Create a new branch for each new bug fix or feature:
+
+       $ git checkout -b [name_of_your_new_branch]
+
+2. Commit your local changes to the local repository. Several commits are fine.
+   Use `gitk` and `git-gui` or just
+
+       $ git commit -m "feat: Notifications are sent to ..."
+
+   Use
+   [Semantic Commit Messages](https://seesparkbox.com/foundry/semantic_commit_messages).
+
+
+3. Regularly push your changes to the remote branch with the same name as your
+   local branch.
+
+       $ git push
+
+4. When you're ready for a code review, issue a pull request for your branch
+   on GitHub.
+
+5. Wait for the feedback of the reviewer. If changes need to be made, go back to
+   step 2, otherwise the reviewer has accepted your changes and you can move on
+   to the next step.
+
+6. Merge your changes into the branch 'staging'
+
+       $ git checkout staging
+       $ git merge [name_of_your_new_branch]
+
+7. Push your changes to the remote staging branch.
+
+       $ git push
+
+8. Deploy on staging.minutehero.net.
+
+       $ cap staging deploy
+
+9. Let the business people test your changes on staging.minutehero.net. If there
+   are issues, go back to step 2. Otherwise go to the next step.
+
+10. Tell Marc Püls that the bug fix or feature is ready for deployment on
+    production.
+
+11. Marc Püls: Merge branch 'staging' into 'master'
+
+        $ git pull
+        $ git checkout master
+        $ git merge staging
+        $ git push
+
+12. Marc Püls: Deploy on production
+
+        $ cap production deploy
+
+Deploying
+---------
+
+We use Capistrano to deploy releases.
+
+We have two instances of this web application:
+
+1. my.minutehero.net (production)
+2. staging.minutehero.net (staging)
+
+which run on separate VMs on AWS. To be able to deploy, your public SSH key must
+be in `~/.ssh/authorized_keys` on the respective VM. Ask Marc Püls to put it
+there.
 
 Documentation and Support
 -------------------------
