@@ -150,7 +150,7 @@ Development Workflow
 
        $ git push
 
-8. Deploy on staging.minutehero.net.
+8. Deploy on staging.minutehero.net (staging).
 
        $ cap staging deploy
 
@@ -167,14 +167,12 @@ Development Workflow
         $ git merge staging
         $ git push
 
-12. Marc Püls: Deploy on production
+12. Marc Püls: Deploy on my.minutehero.net (production).
 
         $ cap production deploy
 
-Deploying
----------
-
-We use Capistrano to deploy releases.
+Infrastructure
+--------------
 
 We have two instances of this web application:
 
