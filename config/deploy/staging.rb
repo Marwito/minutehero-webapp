@@ -40,3 +40,5 @@ server 'staging.minutehero.net', user: 'ubuntu', roles: %w(web app db)
 # setting per server overrides global ssh_options
 
 # fetch(:default_env).merge!(rails_env: :staging)
+
+set :branch, 'staging'
