@@ -38,6 +38,7 @@ gem 'mailjet'
 gem 'letter_opener'
 gem 'newrelic_rpm'
 gem 'prun-ops'
+gem 'aws-sdk'
 
 group :development do
   gem 'web-console'

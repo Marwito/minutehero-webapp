@@ -58,6 +58,14 @@ GEM
     ast (2.3.0)
     autoprefixer-rails (6.6.0)
       execjs
+    aws-sdk (2.10.1)
+      aws-sdk-resources (= 2.10.1)
+    aws-sdk-core (2.10.1)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.10.1)
+      aws-sdk-core (= 2.10.1)
+    aws-sigv4 (1.0.0)
     bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -217,6 +225,7 @@ GEM
     jbuilder (2.6.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
+    jmespath (1.3.1)
     jquery-rails (4.2.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -471,6 +480,7 @@ PLATFORMS
 
 DEPENDENCIES
   administrate
+  aws-sdk
   better_errors
   bootstrap (~> 4.0.0.alpha3.1)
   bootstrap-glyphicons
@@ -547,4 +557,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.13.7
+   1.15.1
