@@ -34,5 +34,5 @@ staging:
 
 production:
   domain_name: my.minutehero.net
-  end_call_notifications_to_email: invite@minutehero.net
+  send_call_notifications_to_email: invite@minutehero.net
 
