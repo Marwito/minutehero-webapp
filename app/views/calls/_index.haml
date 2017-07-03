@@ -25,9 +25,9 @@
                 %i.fa.fa-eye
             - if policy(call).edit?
               = link_to edit_call_path(call), class: 'btn btn-primary btn-sm', title: 'Edit' do
-                %i.fa.fa-pencil
+              %i.fa.fa-pencil
             - if policy(call).destroy?
-              = link_to call, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Delete' do
-                %i.fa.fa-times
+              = link_to call, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Delete' do 
+              %i.fa.fa-times
 - else
   %p No calls scheduled yet.
