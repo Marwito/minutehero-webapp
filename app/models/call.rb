@@ -12,10 +12,6 @@ class Call < ApplicationRecord
     end
   end
 
-  validate do
-    errors.add :schedule_time, I18n.t('call.errors.date_time.past') if past?
-  end
-
   include TableFilters
   columns_filtered :title, :participant_code,
                    'users.first_name', 'users.last_name'
@@ -32,11 +28,6 @@ class Call < ApplicationRecord
     where('(schedule_date + schedule_time) < ?', Time.now)
       .order(:schedule_date, :schedule_time)
   }
-
-  def past?
-    Time.zone = time_zone
-    Time.zone.now > date_time if date_time
-  end
 
   # rubocop:disable AbcSize
   def date_time

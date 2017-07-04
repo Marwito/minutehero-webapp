@@ -23,16 +23,13 @@ aws_region: eu-west-1
 
 defaults: &defaults
   domain_name: localhost:3000
-  send_call_notifications_to_email: development_invite@minutehero.net
 
 development:
   <<: *defaults
 
 staging:
   domain_name: staging.minutehero.net
-  send_call_notifications_to_email: staging_invite@minutehero.net
 
 production:
   domain_name: my.minutehero.net
-  send_call_notifications_to_email: invite@minutehero.net
 

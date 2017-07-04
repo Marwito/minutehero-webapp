@@ -3,9 +3,14 @@
   .col-md-12
     %h3
       Call Details
-      %span.small.grey (Call ID #{@call.id})
+      %span.small.grey 
     %p#notice= notice
 
+    .row
+      .col-md-3
+        %b ID
+      .col-md-3
+        = @call.id
     .row
       .col-md-3
         %b Title
@@ -42,28 +47,9 @@
         %b Time Zone
       .col-md-3
         = @call.time_zone
-    - if @call.past?
-      .row
-        .col-md-3
-          %b Duration
-        .col-md-3
-          0h : 57 min :31 sec
-      .row
-        .col-md-3
-          %b Output files
-        .col-md-3
-          = link_to '' do
-            %i.fa.fa-file-pdf-o
-            PDF Minutes
-          %br
-          = link_to '' do
-            %i.fa.fa-file-text-o
-            Doc Minutes
-          %br
-          = link_to '' do
-            %i.fa.fa-file-audio-o
-            Audio Recording
-
+    %br
     - if policy(@call).edit?
       = link_to 'Edit', edit_call_path(@call), class: 'btn btn-info'
     = render partial: 'buttons'
+
+    

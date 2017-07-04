@@ -1,13 +1,15 @@
 - breadcrumb :calls
 .row
   .col-md-12
-    %h3 Manage Calls
+    %h3 Search Calls
     .row
       .col-md-4
         = render partial: 'layouts/search_form', locals: { model: :calls }
       .col-md-8
+      - if current_user.admin?
         - if policy(Call).create?
           = link_to 'Schedule Call', new_call_path, class: 'btn btn-info pull-right'
+
     %br
     - if @calls.any?
       %table.table.table-hover
@@ -21,11 +23,11 @@
             %th Time Zone
             %th Dial in
             %th Code
-            %th Actions
+            %th{:style => "text-align:center"} Actions
 
         %tbody
           - @calls.each do |call|
-            %tr{class: "#{'past-call' if call.past?}"}
+            %tr
               - if current_user.admin?
                 %td= call.user.name
               %td= call.title
@@ -34,7 +36,7 @@
               %td= call.time_zone
               %td= call.dial_in
               %td= call.participant_code
-              %td
+              %td{:style => "text-align:center"}
                 - if policy(call).show?
                   = link_to call, class: 'btn btn-primary btn-sm', title: 'Details' do
                     %i.fa.fa-eye

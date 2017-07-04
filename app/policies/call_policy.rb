@@ -14,20 +14,19 @@ class CallPolicy < ApplicationPolicy
   end
 
   def show?
-    admin_or_owned? && record.past?
+    admin_or_owned?
   end
 
   def create?
-    user.admin? || user.active?
+    user.admin?
   end
 
   def update?
-    (user.admin? && !record.past?) ||
-        (user.calls.include?(record) && !record.past? && user.active?)
+    user.admin?
   end
 
   def destroy?
-    admin_or_owned?
+    user.admin?
   end
 
   private
