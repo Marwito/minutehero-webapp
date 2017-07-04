@@ -32,7 +32,7 @@ describe CallPolicy do
 
   [:update?, :destroy?].each do |action|
     permissions action do
-      it 'grant access to owned calls for :user' do
+      it 'user cannot update or destroy calls' do
         expect(subject).not_to permit(u1, c1)
         expect(subject).not_to permit(u2, c1)
         expect(subject).not_to permit(u1, c2)
@@ -60,15 +60,10 @@ describe CallPolicy do
       expect(subject).to permit(admin, c1)
       expect(subject).to permit(admin, c2)
     end
-    it 'grant access if call is in the past' do
-      expect(subject).to permit(u1, c1)
-      c1.date_time = Time.now + 2.days
-      expect(subject).to permit(u1, c1)
-    end
   end
 
   permissions :create? do
-    it 'grant access for all roles' do
+    it 'grant access for admin and not for user' do
       expect(subject).not_to permit(u1)
       expect(subject).to permit(admin)
     end
