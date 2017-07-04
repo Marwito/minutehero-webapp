@@ -78,6 +78,7 @@ class User < ApplicationRecord
       identity.save!
     end
     user
+
   end
   # rubocop: enable all
 
@@ -88,7 +89,7 @@ end
 
 class MailNotifier
   def initialize(user)
-    Rails.logger.info "MailNotifier.initialize is executed"
+    Rails.logger.info 'MailNotifier.initialize is executed'
     @user = user
     @aws_region = ENV['aws_region']
     @sender = ENV['send_user_sign_up_notifications_to_email']
@@ -129,7 +130,9 @@ class MailNotifier
   end
 
   def table_rows
-    [['Id', @user.id],['User', "#{@user.first_name} #{@user.last_name}"],
-     ['Email Address', @user.email]]
+    [['Id', @user.id],
+    ['First name', @user.first_name],
+    ['Last name', @user.last_name],
+    ['Email Address', @user.email]]
   end
 end
