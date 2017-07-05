@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :lockable and :timeoutable
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
@@ -36,6 +36,11 @@ class User < ApplicationRecord
   has_many :calls, dependent: :destroy
   belongs_to :product, optional: true
 
+  def after_confirmation
+    mn = MailNotifier.new self
+    mn.send
+  end
+
   # rubocop: disable AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/LineLength, Metrics/PerceivedComplexity
   def self.find_for_oauth(auth, signed_in_resource = nil)
     # Get the identity and user if they exist
@@ -62,6 +67,8 @@ class User < ApplicationRecord
         )
         user.skip_confirmation!
         user.save!
+        mn = MailNotifier.new user
+        mn.send
       end
     end
 
@@ -77,5 +84,55 @@ class User < ApplicationRecord
 
   def email_verified?
     email # && self.email !~ TEMP_EMAIL_REGEX
+  end
+end
+
+class MailNotifier
+  def initialize(user)
+    Rails.logger.info 'MailNotifier.initialize is executed'
+    @user = user
+    @aws_region = ENV['aws_region']
+    @sender = ENV['send_user_sign_up_notifications_to_email']
+    @recipient = ENV['send_user_sign_up_notifications_to_email']
+  end
+
+  def send
+    require 'aws-sdk'
+    ses = Aws::SES::Client.new(region: @aws_region)
+    begin
+      ses.send_email ses_send_email_arg
+      Rails.logger.info 'Notification was sent successfully to admins'
+    rescue => e
+      Rails.logger.error "Email not sent. Reason : #{e}"
+    end
+  end
+
+  private
+
+  def ses_send_email_arg
+    encoding = 'UTF-8'
+    { destination: { to_addresses: [@recipient] },
+      message: { subject: { charset: encoding, data: subject },
+                 body: { html: { charset: encoding, data: htmlbody } } },
+      source: @sender }
+  end
+
+  def subject
+    "New Sign-up: #{@user.email}, #{@user.name}"
+  end
+
+  def htmlbody
+    body = '<table>'
+    table_rows.each do |key, value|
+      body += "<tr><th>#{key}</th><td>#{value}</td></tr>"
+    end
+    body += '</table>'
+  end
+
+  def table_rows
+    [['Id', @user.id],
+     ['First name', @user.first_name],
+     ['Last name', @user.last_name],
+     ['Email Address', @user.email]]
   end
 end

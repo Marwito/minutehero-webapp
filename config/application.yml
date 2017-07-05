@@ -23,13 +23,15 @@ aws_region: eu-west-1
 
 defaults: &defaults
   domain_name: localhost:3000
+  send_user_sign_up_notifications_to_email: development_users@minutehero.net
 
 development:
   <<: *defaults
 
 staging:
   domain_name: staging.minutehero.net
+  send_user_sign_up_notifications_to_email: staging_users@minutehero.net
 
 production:
   domain_name: my.minutehero.net
-
+  send_user_sign_up_notifications_to_email: users@minutehero.net
