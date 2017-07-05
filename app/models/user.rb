@@ -77,8 +77,8 @@ class User < ApplicationRecord
       identity.user = user
       identity.save!
     end
-    user
 
+    user
   end
   # rubocop: enable all
 
@@ -131,8 +131,8 @@ class MailNotifier
 
   def table_rows
     [['Id', @user.id],
-    ['First name', @user.first_name],
-    ['Last name', @user.last_name],
-    ['Email Address', @user.email]]
+     ['First name', @user.first_name],
+     ['Last name', @user.last_name],
+     ['Email Address', @user.email]]
   end
 end
