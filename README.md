@@ -84,11 +84,11 @@ We use AWS SES to receive email notifications from the app.
    AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in the file
    'config/application.yml'
 
-3. You can edit the email addresses you want to receive notifications for using
-   the variable 'send_call_notifications_to_email' in the file
+3. You can edit the email address you want to receive notifications for using
+   the variable 'send_user_sign_up_notifications_to_email' in the file
    'config/application.yml' too. 
 
-4. Verify these email addresses with Amazon SES.
+4. Verify that email address with Amazon SES.
 
 ### Setup of the database
 

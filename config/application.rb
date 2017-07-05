@@ -18,7 +18,6 @@ module MinuteHero
                        request_specs: false
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
-
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
 
     # Settings in config/environments/* take precedence over those specified here.
