@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+   cat <<EOF
+Usage: create_dev_branch branch_name
+
+Helper script to create a new development branch based on staging.
+EOF
+fi
+
+git checkout staging \
+  && git pull \
+  && git checkout -b $1 \
+  && printf "Development branch '%s' created based on branch 'staging'.\n" $1 \
+  || printf "Error: Could not create development branch '%s'.\n" $1
