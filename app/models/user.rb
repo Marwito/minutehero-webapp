@@ -37,6 +37,7 @@ class User < ApplicationRecord
   belongs_to :product, optional: true
 
   def after_confirmation
+    Rails.logger.info 'After confirmation step: Normal Sign_up'
     mn = MailNotifier.new self
     mn.send
   end
@@ -67,11 +68,11 @@ class User < ApplicationRecord
         )
         user.skip_confirmation!
         user.save!
+        Rails.logger.info 'OAuth Sign-up'
         mn = MailNotifier.new user
         mn.send
       end
     end
-
     # Associate the identity with the user if needed
     if identity.user != user
       identity.user = user
@@ -89,7 +90,8 @@ end
 
 class MailNotifier
   def initialize(user)
-    Rails.logger.info 'MailNotifier.initialize is executed'
+    Rails.logger.info 'MailNotifier.initialize is executed for the user: ' \
+                      "#{user.first_name} #{user.last_name}, #{user.email}"
     @user = user
     @aws_region = ENV['aws_region']
     @sender = ENV['send_user_sign_up_notifications_to_email']
