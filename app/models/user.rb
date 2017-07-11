@@ -41,10 +41,6 @@ class User < ApplicationRecord
     mn.send
   end
 
-  def confirmed_at_safe
-    confirmed_at || '-'
-  end
-
   # rubocop: disable AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/LineLength, Metrics/PerceivedComplexity
   def self.find_for_oauth(auth, signed_in_resource = nil)
     # Get the identity and user if they exist
