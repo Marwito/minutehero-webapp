@@ -9,10 +9,8 @@
         .col-md-9.offset-md-3.small (confirmation will be sent on change)
         - if @user.pending_reconfirmation?
           %div
-            Currently waiting confirmation for: #{@user.unconfirmed_email}     
-        .form-group
-          .col-md-3 Confirmed at
-          .col-md-9= @user.confirmed_at_safe
+            Currently waiting confirmation for: #{@user.unconfirmed_email}
+
         .form-group
           .col-md-3 User ID
           .col-md-9= @user.id.to_s.rjust(10, '0')
