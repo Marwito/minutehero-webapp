@@ -92,8 +92,8 @@ end
 class MailNotifier
   def initialize(user)
     Rails.logger.info 'MailNotifier.initialize is executed for the user: ' /
-    "user_id = #{user.id} #{user.first_name} " /
-    "#{user.last_name}, #{user.email}"
+                      "user_id = #{user.id} #{user.first_name} " /
+                      "#{user.last_name}, #{user.email}"
     @user = user
     @aws_region = ENV['aws_region']
     @sender = ENV['send_user_sign_up_notifications_to_email']
