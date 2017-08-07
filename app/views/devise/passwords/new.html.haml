@@ -1,9 +1,13 @@
-.authform
-  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f|
-    %h3 Forgot your password?
-    %p We'll send password reset instructions.
-    = devise_error_messages!
-    .form-group
-      = f.email_field :email, :autofocus => true, class: 'form-control', placeholder: 'email'
-    .form-group
-      = f.submit 'Reset Password', :class => 'button right'
+.row
+  .col-md-4.col-md-offset-4
+    .ibox.float-e-margins
+      .ibox-title
+        %h3 Forgot your password?
+      .ibox-content
+        %p We'll send password reset instructions.
+        = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f|
+          = devise_error_messages!
+          .form-group
+            = f.email_field :email, :autofocus => true, class: 'form-control', placeholder: 'Email'
+          .form-group
+            = f.submit 'Reset Password', :class => 'btn btn-success btn-block m-b bold-font'

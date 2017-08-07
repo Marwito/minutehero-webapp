@@ -1,0 +1,9 @@
+.logmod.animated.fadeInDown
+  .logmod__wrapper
+    .logmod__container
+      %ul.logmod__tabs
+        %li{"data-tabtar" => "lgm-1"}
+          = link_to 'Sign in', new_user_session_path, target: '_self'
+        %li.current{"data-tabtar" => "lgm-2"}
+          = link_to 'Sign up', new_user_registration_path, target: '_self'
+      .logmod__tab-wrapper

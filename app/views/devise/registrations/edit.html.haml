@@ -1,42 +1,44 @@
+- content_for(:title, "Hello #{current_user.first_name}")
 - breadcrumb :devise
-.row
-  .col-md-4.offset-md-2
-    = simple_form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, role: 'form', class: 'form-horizontal', wrapper: :horizontal_form } do |f|
-      = devise_error_messages!
-      %h3 Your Account
-      = f.input :email
-      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-        %div
-          Currently waiting confirmation for: #{resource.unconfirmed_email}
-      = link_to 'Change Password', '#', class: 'btn btn-primary', data: {toggle: 'modal', target: '#modal-change-password'}
-
-      %h3 Personal Data
-      = f.input :first_name, autofocus: true
-      = f.input :last_name
-      = f.input :company
-      = f.input :country
-      .form-group
-        = f.label :time_zone
-        = f.collection_select :time_zone, User::TIME_ZONES, :first, :second, {include_blank: true}, {class: 'form-control'}
-
-      = f.submit 'Update', class: 'btn btn-primary right'
-
-.row
-  .col-md-8.offset-md-2
-    %h3 Cancel Account
-    %p To delete your account, please write an email to #{mail_to 'service@minutehero.net'}.
-    -#%p Unhappy? We'll be sad to see you go.
-    -#= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger right'
-
-#modal-change-password.modal.fade
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"data-dismiss" => "modal"}
-          %span ×
-        %h4.modal-title Contact us
-        = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f|
-          %p Leave these fields blank if you don't want to change your password.
-          = f.input :password, autocomplete: 'off'
-          = f.input :password_confirmation
-          = f.submit 'Change', class: 'btn btn-primary right'
+.wrapper.wrapper-content.animated.fadeInUp
+  .row
+    .col-xs-12.col-md-8
+      .ibox.float-e-margins
+        .ibox-title
+          %h3 My Account
+        .ibox-content
+          .row
+            .col-md-6
+              = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :patch, role: 'form'}) do |f|
+                = devise_error_messages!
+                .form-group
+                  = f.input :email
+                - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+                  %div
+                    Currently waiting confirmation for: #{resource.unconfirmed_email} 
+                .form-group
+                  = link_to 'Change Password', '#', class: 'btn btn-primary', data: {toggle: 'modal', target: '#modal-change-password'}
+                .clearfix
+                .form-group
+                  = f.input :first_name
+                .form-group
+                  = f.input :last_name
+                .form-group
+                  = f.label :country, 'Country', class: 'string optional'
+                  %br
+                  = f.collection_select :country, Country.all, :alpha2_code, :name, {include_blank: false}, {class: 'form-control'}
+                .form-group
+                  = f.label :time_zone
+                  = f.collection_select :time_zone, User::TIME_ZONES, :first, :second, {include_blank: true}, {class: 'form-control'}
+                .form-group  
+                  = f.input :company, placeholder: 'Your company'
+                .form-group
+                  = f.submit 'Update', class: 'btn btn-success btn-lg m-l-sm bold-font'
+    .col-xs-6.col-md-4
+      - if !current_user.admin?
+        .ibox.float-e-margins
+          .ibox-title
+            %h3 Account Removal
+          .ibox-content
+            %p To delete your account, please send an email to #{mail_to 'service@minutehero.net'}.
+= render 'devise/passwords/change_password_modal'

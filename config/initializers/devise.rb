@@ -12,9 +12,12 @@ Devise.setup do |config|
   config.omniauth :linkedin,
                   ENV['linkedin_client_id'],
                   ENV['linkedin_client_secret']
-  config.omniauth :facebook,
+  config.omniauth :facebook, 
                   ENV['facebook_app_id'],
-                  ENV['facebook_secret']
+                  ENV['facebook_secret'],
+                  scope: 'public_profile,email, user_location',
+                  info_fields: 'first_name,last_name,email, location',
+                  display: 'popup'           
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,

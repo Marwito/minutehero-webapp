@@ -1,0 +1,27 @@
+.row.border-bottom
+  %nav.navbar.navbar-static-top.grey-bg{:role=>"navigation", :style=>"margin-bottom: 0"}
+    .navbar-header
+      %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+      %a.navbar-brand{:href => calls_path} MinuteHero
+    %ul.nav.navbar-top-links.navbar-right
+      %li
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          %i.fa.fa-2x.fa-gear
+        %ul.dropdown-menu.animated.fadeInRight.m-t-xs
+          - if current_user.admin?
+            %li
+              = link_to 'Users List', users_path, class: 'nav-link'
+          %li
+            = link_to 'Account Setttings', edit_user_registration_path, class: 'nav-link'
+          %li
+            = link_to 'Help', 'https://www.minutehero.net/help/', target: '_blank'
+          %li
+            = link_to 'FAQ', 'https://www.minutehero.net/faq/', target: '_blank'
+          %li.divider
+          %li
+            = link_to 'Sign out', destroy_user_session_path, :method=>'delete', class: 'nav-link'      
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2= content_for(:title) || "Welcome"
+    =breadcrumbs
+  .col-lg-2

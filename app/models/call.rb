@@ -16,12 +16,8 @@ class Call < ApplicationRecord
   columns_filtered :title, :participant_code,
                    'users.first_name', 'users.last_name'
 
-  scope :most_recent, -> {
-    where('(schedule_date + schedule_time) < ?', Time.now)
-      .order(:schedule_date, :schedule_time)
-  }
   scope :upcoming, -> {
-    where('(schedule_date + schedule_time) > ?', Time.now)
+    where('(schedule_date + schedule_time) >= ?', Time.now)
       .order(:schedule_date, :schedule_time)
   }
   scope :past, -> {

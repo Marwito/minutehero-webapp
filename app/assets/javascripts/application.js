@@ -10,17 +10,27 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require tether
+// = require jquery
+//= require jquery/jquery-3.1.1.min.js
+// = require jquery_ujs
+// = require turbolinks
+// = require tether
 //= require bootstrap-sprockets
-//= require stringjs/dist/string.min
+// = require stringjs/dist/string.min
 //= require intl-tel-input/build/js/intlTelInput
 //= require intl-tel-input/build/js/utils
-//= require moment/min/moment.min
-//= require eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min
-//= require typeahead.js/dist/typeahead.jquery
-//= require typeahead.js/dist/bloodhound
-//= require bootstrap-table/src/bootstrap-table
+// = require moment/min/moment.min
+// = require eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min
+// = require typeahead.js/dist/typeahead.jquery
+// = require typeahead.js/dist/bloodhound
+// = require bootstrap-table/src/bootstrap-table
+//= require metisMenu/jquery.metisMenu.js
+//= require pace/pace.min.js
+//= require slimscroll/jquery.slimscroll.min.js
 //= require_tree .
+//= require footable/footable.all.min.js
+//= require inspinia.js
+//= require peity/jquery.peity.min.js
+//= require gallery.js
+//= require select2/select2.full.min.js
+

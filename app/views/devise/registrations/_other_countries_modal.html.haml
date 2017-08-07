@@ -1,0 +1,50 @@
+#modal-other-countries.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h2 Subscribe to our mailing list
+        %button.close{"data-dismiss" => "modal"}
+          %span x
+      .modal-body
+        #subscribeFormWelcome
+          Leave us your email address if you want to be informed when MinuteHero launches in other countries. We will
+          %strong only use your email for this specific purpose.
+          If you want to also sign up for our general newsletter,
+          %a{:href => "https://www.minutehero.net/newsletter_signup/", :target => "_blank"} click here...
+        #mc_embed_signup
+          %form#mc-embedded-subscribe-form.validate{:action => "//minutehero.us12.list-manage.com/subscribe/post?u=a300fb7196f098261d16616e4&id=752e2b8a00", :method => "post", :name => "mc-embedded-subscribe-form", :novalidate => "", :target => "_blank"}
+            #mc_embed_signup_scroll
+              .indicates-required
+                %span.asterisk *
+                indicates required
+              .mc-field-group
+                %label{:for => "mce-EMAIL"}
+                  Your Email Address
+                  %span.asterisk *
+                %input#mce-EMAIL.required.email{:name => "EMAIL", :type => "email", :value => ""}/
+              .mc-field-group
+                %label{:for => "mce-COUNTRY"}
+                  Country
+                  %span.asterisk *
+                %input#mce-COUNTRY.required{:name => "COUNTRY", :type => "text", :value => ""}/
+              .mc-field-group
+                %label{:for => "mce-FNAME"}
+                  First Name
+                  %span.asterisk *
+                %input#mce-FNAME.required{:name => "FNAME", :type => "text", :value => ""}/
+              .mc-field-group
+                %label{:for => "mce-LNAME"}
+                  Last Name
+                  %span.asterisk *
+                %input#mce-LNAME.required{:name => "LNAME", :type => "text", :value => ""}/
+              #mce-responses.clear
+                #mce-error-response.response{:style => "display:none"}
+                #mce-success-response.response{:style => "display:none"}
+              / real people should not fill this in and expect good things - do not remove this or risk form bot signups
+              %div{"aria-hidden" => "true", :style => "position: absolute; left: -5000px;"}
+                %input{:name => "b_a300fb7196f098261d16616e4_752e2b8a00", :tabindex => "-1", :type => "text", :value => ""}/
+              .clear
+                #mc-embedded-subscribe.button{:name => "subscribe", :type => "submit", :value => "Subscribe", :class => "btn btn-block m-b-sm bold-font"}/
+  %script{:src => "//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js", :type => "text/javascript"}
+  :javascript
+    (function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[3]='COUNTRY';ftypes[3]='text';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);

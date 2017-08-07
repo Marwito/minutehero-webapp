@@ -1,24 +1,24 @@
+-#- breadcrumb :visitors
 .row#welcome
-  .col-md-12
-    %h3 Welcome!
-    %h5
-      To add MinuteHero to a call, just send a
-      calendar invite to #{mail_to 'invite@minutehero.net'}
-  .col-md-12
-    - link = (@most_recent_calls) ? @most_recent_calls.first : '#'
-    = link_to link, class: 'btn btn-block btn-primary main ' do
-      %i.fa.fa-clock-o
-      %span.align-top Your most recent Call
-  .col-md-4
-    = link_to calls_path, class: 'btn btn-info btn-block' do
-      %i.fa.fa-database
-      %span.align-center View Calls
-  .col-md-4
-    = link_to edit_user_registration_path, class: 'btn btn-info btn-block' do
-      %i.fa.fa-user
-      %span.align-center My Account
-  .col-md-4
-    = link_to 'https://www.minutehero.net/help/', target: '_blank', class: 'btn btn-info btn-block' do
-      %i.fa.fa-question-circle
-      %span.align-center Help
-
+  .col-lg-12
+    .wrapper.wrapper-content.animated.fadeInUp
+      .ibox
+        .ibox-title
+          %h3
+            To add MinuteHero to a call, just send a
+            calendar invite to #{mail_to 'invite@minutehero.net'}
+            - link = (@most_recent_calls) ? @most_recent_calls.first : '#'
+        .ibox-content
+          = link_to link, class: 'btn btn-block btn-primary main ' do
+            %i.fa.fa-clock-o
+            %span.align-top Your most recent Call
+          = link_to calls_path, class: 'btn btn-info btn-block' do
+            %i.fa.fa-database
+            %span.align-top Manage Calls
+          = link_to edit_user_registration_path, class: 'btn btn-info btn-block' do
+            %i.fa.fa-user
+            %span.align-top Your Account
+          = link_to page_path('help'), class: 'btn btn-info btn-block' do
+            %i.fa.fa-question-circle
+            %span.align-top Help & FAQ
+          = link_to 'Schedule a call via our web interface', new_call_path, class: 'pull-right'

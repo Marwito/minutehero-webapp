@@ -1,6 +1,5 @@
 = simple_form_for(@call) do |f|
   = f.error_notification
-
   .form-inputs
     - if current_user.admin?
       = f.input :user_id
@@ -10,7 +9,6 @@
         .col-md-7
           = link_to '#', class: 'btn btn-danger btn-sm reset', title: 'Reset' do
             %i.fa.fa-times
-
       :coffee
         $('#call_user_id').hide()
         engine = new Bloodhound(
