@@ -1,8 +1,8 @@
 .row.border-bottom
-  %nav.navbar.navbar-static-top.grey-bg{:role=>"navigation", :style=>"margin-bottom: 0"}
+  %nav.navbar.navbar-static-top.grey-bg
     .navbar-header
-      %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
-      %a.navbar-brand{:href => calls_path} MinuteHero
+      -# %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+      = link_to image_tag('logo-full', style: 'max-height: 60px;'), root_path, class: 'm-l-md'
     %ul.nav.navbar-top-links.navbar-right
       %li
         %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

@@ -15,6 +15,10 @@ crumb :call do |call|
   parent :calls
 end
 
+crumb :account do
+  link "Account Details", edit_user_registration_path
+end
+
 crumb :users do
   link "Users", users_path
 end
