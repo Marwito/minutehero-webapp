@@ -1,14 +1,14 @@
-= link_to 'Didn\'t get it? Click here', '#', class: 'btn btn-primary', data: {toggle: 'modal', target: '#new_request'}
+= link_to 'Didn\'t get it? Click here', '#', class: 'btn btn-warning pull-right bold-font', data: {toggle: 'modal', target: '#new_request'}
 
 #new_request.modal.fade
   .modal-dialog
     .modal-content
       .modal-header
+        %h3 Contact us
         %button.close{"data-dismiss" => "modal"}
-          %span ×
-        %h4.modal-title Contact us
-      = form_for Request.new do |f|
-        .modal-body
+          %span.glyphicon.glyphicon-remove
+      .modal-body.m-b-lg
+        = form_for Request.new do |f|
           .form-group
             = f.label :from
             = f.text_field :from, value: params[:email], class: 'form-control'
@@ -18,6 +18,5 @@
           .form-group
             = f.label :content
             = f.text_area :content, class: 'form-control', rows: 5
-        .modal-footer
-          %button.btn.btn-secondary{"data-dismiss" => "modal"} Close
-          = f.submit 'Send', class: 'btn btn-primary'
+          = f.submit 'Send', class: 'btn btn-success bold-font pull-right'
+   

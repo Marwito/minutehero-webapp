@@ -4,7 +4,7 @@
       .ibox-title
         %h3 Forgot your password?
       .ibox-content
-        %p We'll send password reset instructions.
+        %p We'll send password reset instructions via your email address.
         = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f|
           = devise_error_messages!
           .form-group
