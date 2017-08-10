@@ -1,23 +1,20 @@
 - breadcrumb :pages
-%h3 Almost there ....
-
-%p Thank you for signing up to MinuteHero!
-
-%p
-  We sent an email to your address
-  %br
-  (#{params[:email]}) to verify your account. Please
-  %br
-  click the link in the email to activate your
-  %br
-  account. Thank you.
-= link_to 'Resend confirmation instructions', '', id: 'resend', class: 'btn btn-primary'
-:coffeescript
-  $(document).ready ->
-    $('#resend').click (e)->
-      e.preventDefault()
-      $.post '#{user_confirmation_path}', {user:{email: '#{params[:email]}'}}
-      document.location = '#{request.original_url}'
-%br
-%br
-= render partial: 'requests/form'
+.wrapper.wrapper-content.animated.fadeInUp
+  .row
+    .col-md-6.col-md-offset-3
+      .ibox.float-e-margins
+        .ibox-title
+          %h3 Thank you for signing up to MinuteHero!
+        .ibox-content
+          %p We sent an email to your address (#{params[:email]}) to verify your account. Please click the link in the email to activate your account. Thank you!
+          .row
+            .col-md-7
+              = link_to 'Resend confirmation instructions', '', id: 'resend', class: 'btn btn-success bold-font'
+            .col-md-5
+              = render partial: 'requests/form'
+          :coffeescript
+            $(document).ready ->
+              $('#resend').click (e)->
+                e.preventDefault()
+                $.post '#{user_confirmation_path}', {user:{email: '#{params[:email]}'}}
+                document.location = '#{request.original_url}'
