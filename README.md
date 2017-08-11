@@ -160,7 +160,7 @@ Development Workflow
 10. Tell Marc Püls that the bug fix or feature is ready for deployment on
     production.
 
-11. Marc Püls: Merge branch 'staging' into 'master'
+11. Marc Püls: Merge branch 'staging' into 'master'.
 
         $ git pull
         $ git checkout master

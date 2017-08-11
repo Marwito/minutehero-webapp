@@ -1,11 +1,16 @@
-.authform
-  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
-    %h3 Change your password
-    = devise_error_messages!
-    = f.hidden_field :reset_password_token
-    .form-group
-      = f.label :password, 'New password'
-      = f.password_field :password, autofocus: true, autocomplete: 'off', class: 'form-control'
-      = f.label :password_confirmation, 'Confirm new password'
-      = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control'
-    = f.submit 'Change my Password', :class => 'button right'
+.row
+  .col-md-4.col-md-offset-4 
+    .ibox.float-e-margins
+      .ibox-title
+        %h3 Password Reset
+      .ibox-content
+        %p You can now reset your password, don't forget that it must be at least 8 characters long !
+        = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :patch }) do |f|
+          = devise_error_messages!
+          = f.hidden_field :reset_password_token
+          .form-group
+            = f.password_field :password, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'New password'
+          .form-group
+            = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: 'Confirm new password'
+          .form-group
+            = f.submit 'Submit', :class => 'btn btn-success btn-block m-b bold-font'

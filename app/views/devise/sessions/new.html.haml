@@ -1,20 +1,45 @@
-.authform
-  = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f|
-    %h3 Sign in
-    = devise_error_messages!
-    .form-group
-      = f.label :email
-      = f.email_field :email, :autofocus => true, class: 'form-control'
-    .form-group
-      = f.label :password
-      = f.password_field :password, class: 'form-control'
-    - if devise_mapping.rememberable?
-      .checkbox{:style => "width:150px"}
-        %label
-          = f.check_box :remember_me
-          Remember me
-    = recaptcha_tags
-    = f.submit 'Sign in', :class => 'button right'
-    .clearfix
-    %hr
-    = render partial: 'devise/shared/links'
+.logmod.animated.fadeInDown
+  .logmod__wrapper
+    .logmod__container
+      %ul.logmod__tabs
+        %li.current{"data-tabtar" => "lgm-1"}
+          = link_to 'Sign in', new_user_session_path, target: '_self'
+        %li{"data-tabtar" => "lgm-2"}
+          - if devise_mapping.registerable?
+            = link_to 'Sign up', new_user_registration_path, target: '_self'
+      .logmod__tab-wrapper
+        .logmod__tab.lgm-1.show
+          .logmod__heading
+            %span.logmod__heading-subtitle
+              Enter your email and password
+              %strong to sign in
+          .logmod__form
+            = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form', :class => "m-t" }) do |f|
+              = devise_error_messages!
+              .sminputs
+                .input.full.custom
+                  = f.label :email, 'Email *', class: 'string optional'
+                  = f.email_field :email, :autofocus => true, class: 'form-control', placeholder: 'Your email address'
+              .sminputs
+                .input.full.custom
+                  = f.label :password, 'Password *', class: 'string optional'
+                  = f.password_field :password, class: 'form-control', placeholder: 'Your password'
+              - if devise_mapping.rememberable?
+                = f.hidden_field :remember_me, value: true
+              .sminputs
+                .input.full.custom1
+                  = recaptcha_tags
+              .simform__actions
+                .row
+                  .col-md-6
+                    %span.simform__actions-sidetext
+                      - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+                        = link_to 'Forgot your password? Click here', new_password_path(resource_name), class: 'special'
+                        -# = link_to 'Forgot your password? Click here', '#', class: 'special', data: {toggle: 'modal', target: '#modal-forgot-password'}
+                  .col-md-6
+                    = f.submit 'Sign in', class: 'btn btn-success btn-lg pull-right bold-font'
+          .logmod__alter
+            .logmod__alter-container
+              - if devise_mapping.omniauthable?
+                = render 'layouts/oauth_sign_in'
+-# = render 'devise/passwords/forgot_password_modal'

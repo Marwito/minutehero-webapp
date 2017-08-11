@@ -8,12 +8,13 @@ Rails.application.routes.draw do
     resources :requests
     resources :products
     resources :countries
-    root to: 'users#index'
+    root to: 'calls#index'
   end
   root to: 'visitors#index'
   devise_for :users, controllers: { registrations: 'user/registrations',
                                     sessions: 'user/sessions',
                                     omniauth_callbacks: 'omniauth_callbacks'}
+
   resources :users do
     post :bulk, to: 'users#bulk', on: :collection
     get :autocomplete, on: :collection

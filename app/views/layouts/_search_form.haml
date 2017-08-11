@@ -4,7 +4,6 @@
 = form_tag path_with_query, method: :get, class: 'search-form' do
   .input-group{style: 'cursor: pointer;'}
     .input-group-addon
-      = icon 'search'
     :coffee
       $(document).on 'click', '.input-group-addon', ->
         $('.search-form').submit()

@@ -36,13 +36,22 @@ class User < ApplicationRecord
   has_many :calls, dependent: :destroy
   belongs_to :product, optional: true
 
+  validates :email, :first_name, :last_name, presence: true
   def after_confirmation
-    mn = MailNotifier.new self
+    Rails.logger.info 'After confirmation step: Normal Sign-up'
+    mn = MailNotifier.new(self, Country.find_by(alpha2_code: country).name,
+                          'Directly')
     mn.send
   end
 
   def confirmed_at_safe
     confirmed_at || '-'
+  end
+
+  def update_without_password(params, *options)
+    result = update_attributes(params, *options)
+    clean_up_passwords
+    result
   end
 
   # rubocop: disable AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/LineLength, Metrics/PerceivedComplexity
@@ -55,7 +64,6 @@ class User < ApplicationRecord
     # Note that this may leave zombie accounts (with no associated identity)
     # which can be cleaned up at a later date.
     user = signed_in_resource ? signed_in_resource : identity.user
-
     # Create the user if needed
     if user.nil?
       # Check if user exists by email
@@ -64,14 +72,17 @@ class User < ApplicationRecord
       # Create the user if it's a new registration
       if user.nil?
         user = User.new(
-          first_name: auth.info.first_name || auth.info.name,
+          first_name: auth.info.first_name || '-',
           last_name: auth.info.last_name || '-',
           email: email || "change@me-#{auth.uid}-#{auth.provider}.com",
-          password: "#{Devise.friendly_token[0, 20]}9?"
+          password: "#{Devise.friendly_token[0, 20]}9?",
+          country: nil
         )
+        location = auth.info.location || 'Unavailable information'
         user.skip_confirmation!
         user.save!
-        mn = MailNotifier.new user
+        Rails.logger.info 'OAuth Sign-up'
+        mn = MailNotifier.new(user, location, auth.provider.capitalize)
         mn.send
       end
     end
@@ -92,12 +103,16 @@ class User < ApplicationRecord
 end
 
 class MailNotifier
-  def initialize(user)
-    Rails.logger.info 'MailNotifier.initialize is executed'
+  def initialize(user, location, signed_up_via)
+    Rails.logger.info 'MailNotifier.initialize is executed for the user: ' \
+                      "user_id = #{user.id} #{user.first_name} " \
+                      "#{user.last_name}, #{user.email}"
     @user = user
     @aws_region = ENV['aws_region']
     @sender = ENV['send_user_sign_up_notifications_to_email']
     @recipient = ENV['send_user_sign_up_notifications_to_email']
+    @country_region = location
+    @signed_up_via = signed_up_via
   end
 
   def send
@@ -137,6 +152,8 @@ class MailNotifier
     [['Id', @user.id],
      ['First name', @user.first_name],
      ['Last name', @user.last_name],
-     ['Email Address', @user.email]]
+     ['Email Address', @user.email],
+     ['Country_or_Region', @country_region],
+     ['Signed Up Via', @signed_up_via]]
   end
 end

@@ -1,0 +1,8 @@
+- resource_class.omniauth_providers.each do |provider|
+  %a{:class => "connect #{provider}", :href => omniauth_authorize_path(resource_name, provider)}
+    .connect__icon
+      %i{:class => "fa fa-#{provider}"}
+    .connect__context
+      %span
+        Sign in with
+        %strong #{OmniAuth::Utils.camelize(provider)}

@@ -9,6 +9,8 @@ class CallsController < ApplicationController
     @calls = @calls.joins(:user)
                    .table_filters params,
                                   'schedule_date desc, schedule_time desc'
+    @past_calls = CallPolicy::Scope.new(current_user, Call).resolve_past
+    @upcoming_calls = CallPolicy::Scope.new(current_user, Call).resolve_upcoming
   end
 
   # GET /calls/1

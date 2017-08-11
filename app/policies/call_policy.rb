@@ -7,6 +7,22 @@ class CallPolicy < ApplicationPolicy
         user.calls
       end
     end
+
+    def resolve_past
+      if user.admin?
+        Call.past
+      else
+        user.calls.past
+      end
+    end
+
+    def resolve_upcoming
+      if user.admin?
+        Call.upcoming
+      else
+        user.calls.upcoming
+      end
+    end
   end
 
   def index?

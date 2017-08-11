@@ -1,50 +1,56 @@
+- content_for(:title, "Hello #{current_user.first_name}")
 - breadcrumb :calls
-.row
-  .col-md-12
-    %h3 Search Calls
-    .row
-      .col-md-4
-        = render partial: 'layouts/search_form', locals: { model: :calls }
-      .col-md-8
+.wrapper.wrapper-content.animated.fadeInUp
+  .row
+    .col-xs-12.col-sm-6.col-md-8
+      .ibox.float-e-margins
+        .ibox-title
+          %h3 Meetings List
+        .ibox-content
+          .row
+            .col-md-6
+            .col-md-3.col-md-offset-3  
+              - if policy(Call).create?      
+                = link_to "Schedule Call", new_call_path, class: "btn btn-success btn-lg m-l-sm bold-font"
+          -# %form.navbar-form-custom{:action => "", :method => "post", :role => "search"}
+            .form-group
+              %input#top-search.form-control{:name => "top-search", :placeholder => "Search your meetings...", :type => "text"}
+          .tabs-container
+            %ul.nav.nav-tabs
+              %li.active
+                %a{"data-toggle" => "tab", :href => "#tab-1"} UPCOMING MEETINGS
+              %li
+                %a{"data-toggle" => "tab", :href => "#tab-2"} PAST MEETINGS
+            .tab-content
+              #tab-1.tab-pane.active
+                .panel-body
+                  = render partial: 'calls_table', locals: {calls_list: @upcoming_calls}
+              #tab-2.tab-pane
+                .panel-body
+                  = render partial: 'calls_table', locals: {calls_list: @past_calls}
+    .col-xs-6.col-md-4
+      .ibox.float-e-margins
+        .ibox-title
+          %h3 Tutorial
+        .ibox-content
+          %ul.list-inline
+            %li{"data-target" => "#myModal", "data-toggle" => "modal"}
+              %a{"data-slide-to" => "0", :href => "#carousel2"}
+                %img.img-thumbnail{:src => "assets/Slideshow_Folie_1_small.jpg"}/
       - if current_user.admin?
-        - if policy(Call).create?
-          = link_to 'Schedule Call', new_call_path, class: 'btn btn-info pull-right'
-
-    %br
-    - if @calls.any?
-      %table.table.table-hover
-        %thead.thead-default
-          %tr
-            - if current_user.admin?
-              %th= sort_column_by 'first_name', 'User'
-            %th= sort_column_by :title
-            %th= sort_column_by :schedule_date, 'Date'
-            %th Time
-            %th Time Zone
-            %th Dial in
-            %th Code
-            %th{:style => "text-align:center"} Actions
-
-        %tbody
-          - @calls.each do |call|
-            %tr
-              - if current_user.admin?
-                %td= call.user.name
-              %td= call.title
-              %td= l call.schedule_date
-              %td= l call.schedule_time
-              %td= call.time_zone
-              %td= call.dial_in
-              %td= call.participant_code
-              %td{:style => "text-align:center"}
-                - if policy(call).show?
-                  = link_to call, class: 'btn btn-primary btn-sm', title: 'Details' do
-                    %i.fa.fa-eye
-                - if policy(call).edit?
-                  = link_to edit_call_path(call), class: 'btn btn-primary btn-sm', title: 'Edit' do
-                    %i.fa.fa-pencil
-                - if policy(call).destroy?
-                  = link_to call, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Delete' do
-                    %i.fa.fa-times
-    - else
-      %p No matching calls found.
+        .ibox.float-e-margins
+          .ibox-title
+            %h3 Referral Program
+          .ibox-content
+            %p.font-custom Invite a colleague or a friend through email and get one additional month of MinuteHero for free!
+            = link_to "INVITE", new_user_invitation_path, class: "btn btn-success btn-block bold-font"
+= render 'slideshow_modal'
+:javascript
+  $(document).ready(function() {
+    $('.footable').footable();
+    $('.nav-tabs a').click(function (e) {
+      e.preventDefault(); //prevents re-size from happening before tab shown
+      $(this).tab('show'); //show tab panel 
+      $('.footable').trigger('footable_resize'); //fire re-size of footable
+    });
+  });

@@ -2,24 +2,26 @@
 %html
   %head
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-    %title= content_for?(:title) ? yield(:title) : 'MinuteHero'
+    %title MinuteHero
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'MinuteHero'}"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
+    = favicon_link_tag 'favicon.ico'
+    %link{:href => "//cdn-images.mailchimp.com/embedcode/classic-10_7.css", :rel => "stylesheet", :type => "text/css"}/
+    :css
+      #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:430px;}
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
     = csrf_meta_tags
-  %body
-    %header
-      = render 'layouts/navigation'
-    %main{:role => "main"}
-      .row
-        .col-md-12= breadcrumbs
-      = render 'layouts/messages'
-      = yield
-    %footer
-      .container
-        %p
-          = link_to 'About Us', 'https://www.minutehero.net/about-us/', target: '_blank'
-          |
-          = link_to 'FAQ', 'https://www.minutehero.net/faq/', target: '_blank'
-          |
-          = link_to 'MinuteHero Website', 'https://www.minutehero.net', target: '_blank'
+  - if user_signed_in?
+    %body.top-navigation
+      #wrapper
+        #page-wrapper.gray-bg
+          = render 'layouts/topnavbar'
+          = render 'layouts/messages'
+          = yield
+          = render 'layouts/footer'
+  - else
+    %body.top-navigation
+      #wrapper
+        #page-wrapper
+          = render 'layouts/messages'
+          = yield

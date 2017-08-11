@@ -3,6 +3,7 @@ user = User.find_or_create_by!(email: ENV['admin_email']) do |u|
   u.last_name = 'User'
   u.password = Rails.application.secrets.admin_password
   u.password_confirmation = Rails.application.secrets.admin_password
+  u.country = Country::DEFAULT_ALPHA_CODE
   u.admin!
   u.confirm
 end
@@ -15,9 +16,3 @@ puts 'CREATED ADMIN USER: ' << user.email
 end
 
 puts 'CREATED PRODUCTS'
-
-Country.find_or_create_by alpha2_code: 'de', name: 'Germany'
-Country.find_or_create_by alpha2_code: 'es', name: 'Spain'
-Country.find_or_create_by alpha2_code: 'gb', name: 'United Kingdom'
-
-puts 'CREATED COUNTRIES'

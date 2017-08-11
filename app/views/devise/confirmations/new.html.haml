@@ -3,6 +3,7 @@
     %h2 Resend confirmation instructions
     = devise_error_messages!
     .form-group
-      = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control', placeholder: 'email'
+      = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control', placeholder: 'Email'
     .form-group
-      = f.submit "Resend", :class => 'button right'
+      = f.submit "Resend", :class => 'btn btn-primary block full-width m-b'
+    = render partial: 'devise/shared/links'

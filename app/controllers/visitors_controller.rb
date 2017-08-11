@@ -1,9 +1,9 @@
 class VisitorsController < ApplicationController
   def index
     if user_signed_in?
-      @most_recent_calls = current_user.calls.most_recent
+      redirect_to calls_path
     else
-      render 'pages/home'
+      redirect_to new_user_session_path
     end
   end
 end
