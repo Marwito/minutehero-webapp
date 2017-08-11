@@ -27,7 +27,7 @@
           %td= call.time_zone 
           %td
             - if policy(call).edit?
-              = link_to call, class: 'btn btn-primary btn-circle', title: 'Edit' do
+              = link_to edit_call_path(call), class: 'btn btn-primary btn-circle', title: 'Edit' do
                 %i.fa.fa-pencil
             - if policy(call).destroy?
               = link_to call, class: 'btn btn-danger btn-circle', method: :delete, data: { confirm: 'Are you sure?' }, title: 'Delete' do
