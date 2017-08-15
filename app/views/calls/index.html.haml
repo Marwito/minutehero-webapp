@@ -24,10 +24,16 @@
             .tab-content
               #tab-1.tab-pane.active
                 .panel-body
-                  = render partial: 'calls_table', locals: {calls_list: @upcoming_calls}
+                  - if @upcoming_calls.any?
+                    = render partial: 'calls_table', locals: {calls_list: @upcoming_calls}
+                  - else
+                    %h4 No upcoming calls yet.
               #tab-2.tab-pane
                 .panel-body
-                  = render partial: 'calls_table', locals: {calls_list: @past_calls}
+                  - if @past_calls.any?
+                    = render partial: 'calls_table', locals: {calls_list: @past_calls}
+                  - else
+                    %h4 No past calls yet.
     .col-xs-6.col-md-4
       .ibox.float-e-margins
         .ibox-title
