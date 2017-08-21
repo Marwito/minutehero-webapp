@@ -1,0 +1,9 @@
+.wrapper.wrapper-content.animated.fadeInUp
+  .row
+    .col-md-6.col-md-offset-3
+      .ibox.float-e-margins
+        .ibox-title
+          %h3 Service unavailable in your country !
+        .ibox-content
+          %p Sorry, you may not sign up because Q is unavailable in your country. Click #{link_to 'here', '#',data: {toggle: 'modal', target: '#modal-other-countries'}} if you want to get a notice once Q starts there.
+= render partial: 'devise/registrations/other_countries_modal'

@@ -79,18 +79,21 @@ class User < ApplicationRecord
           country: nil
         )
         location = auth.info.location || 'Unavailable information'
-        user.skip_confirmation!
-        user.save!
-        Rails.logger.info 'OAuth Sign-up'
-        mn = MailNotifier.new(user, location, auth.provider.capitalize)
-        mn.send
+        parsed_country = parsing(location)
+        puts "this is the parsed country #{parsed_country}"
+        check = Country.find_by name: parsed_country
+        if check.nil?
+          @supported_country = false
+          user.skip_confirmation!
+        else
+          @supported_country = true
+          user.skip_confirmation!
+          user.save!
+          Rails.logger.info 'OAuth Sign-up'
+          mn = MailNotifier.new(user, location, auth.provider.capitalize)
+          mn.send
+        end
       end
-    end
-
-    # Associate the identity with the user if needed
-    if identity.user != user
-      identity.user = user
-      identity.save!
     end
 
     user
@@ -99,6 +102,20 @@ class User < ApplicationRecord
 
   def email_verified?
     email # && self.email !~ TEMP_EMAIL_REGEX
+  end
+
+  def self.parsing(location)
+    country_region = location.split(', ')
+    puts "The country_region is: #{country_region}"
+    if country_region.length == 2
+      country_region[0]
+    else
+      country_region[1]
+    end
+  end
+
+  def self.country_supported?
+    @supported_country
   end
 end
 
