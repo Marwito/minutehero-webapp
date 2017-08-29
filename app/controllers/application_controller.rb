@@ -21,10 +21,12 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name,
-                                                       :last_name, :country])
+                                                       :last_name, :country,
+                                                       :phone_number])
     devise_parameter_sanitizer
       .permit(:account_update, keys: [:first_name, :last_name, :country,
-                                      :time_zone, :company, :password])
+                                      :time_zone, :company, :password,
+                                      :phone_number])
 
     devise_parameter_sanitizer.permit(:invite, keys: [:first_name,
                                                       :last_name])

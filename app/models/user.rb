@@ -36,7 +36,9 @@ class User < ApplicationRecord
   has_many :calls, dependent: :destroy
   belongs_to :product, optional: true
 
-  validates :email, :first_name, :last_name, presence: true
+  validates :email, :first_name, :last_name, :phone_number, presence: true
+  validates :phone_number, length: { in: 9..18 }
+
   def after_confirmation
     Rails.logger.info 'After confirmation step: Normal Sign-up'
     mn = MailNotifier.new(self, Country.find_by(alpha2_code: country).name,
@@ -153,6 +155,7 @@ class MailNotifier
      ['First name', @user.first_name],
      ['Last name', @user.last_name],
      ['Email Address', @user.email],
+     ['Phone Number', @user.phone_number],
      ['Country_or_Region', @country_region],
      ['Signed Up Via', @signed_up_via]]
   end
