@@ -28,6 +28,10 @@
                   = f.label :email, 'Email *'
                   = f.email_field :email, class: 'form-control', placeholder: 'Your email address'
               .sminputs
+                .input.full.custom
+                  = f.label :phone_number, 'Phone Number *'
+                  = f.text_field :phone_number, class: 'form-control', placeholder: 'Your phone number'
+              .sminputs
                 .input.full.custom2
                   = f.label :password, 'Password *'
                   = f.password_field :password, class: 'form-control', placeholder: 'Your password'
