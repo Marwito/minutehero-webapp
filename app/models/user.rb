@@ -37,11 +37,20 @@ class User < ApplicationRecord
   belongs_to :product, optional: true
 
   validates :email, :first_name, :last_name, presence: true
+
   def after_confirmation
-    Rails.logger.info 'After confirmation step: Normal Sign-up'
+    Rails.logger.info 'After email confirmation step'
     mn = MailNotifier.new(self, Country.find_by(alpha2_code: country).name,
-                          'Directly')
+                          'Directly', action_type)
     mn.send
+  end
+
+  def action_type
+    if sign_in_count.zero?
+      'sign-up'
+    else
+      'email-change'
+    end
   end
 
   def confirmed_at_safe
@@ -78,11 +87,12 @@ class User < ApplicationRecord
           password: "#{Devise.friendly_token[0, 20]}9?",
           country: nil
         )
-        location = auth.info.location || 'Unavailable information'
+        country_region = auth.info.location || 'Unavailable information'
         user.skip_confirmation!
         user.save!
         Rails.logger.info 'OAuth Sign-up'
-        mn = MailNotifier.new(user, location, auth.provider.capitalize)
+        mn = MailNotifier.new(user, country_region, auth.provider.capitalize,
+                              user.action_type)
         mn.send
       end
     end
@@ -103,16 +113,17 @@ class User < ApplicationRecord
 end
 
 class MailNotifier
-  def initialize(user, location, signed_up_via)
-    Rails.logger.info 'MailNotifier.initialize is executed for the user: ' \
-                      "user_id = #{user.id} #{user.first_name} " \
+  def initialize(user, country_region, signed_up_via, action_type)
+    Rails.logger.info "MailNotifier.initialize is executed on #{action_type} " \
+                      "for the user: user_id = #{user.id} #{user.first_name} " \
                       "#{user.last_name}, #{user.email}"
     @user = user
     @aws_region = ENV['aws_region']
     @sender = ENV['send_user_sign_up_notifications_to_email']
     @recipient = ENV['send_user_sign_up_notifications_to_email']
-    @country_region = location
+    @country_region = country_region
     @signed_up_via = signed_up_via
+    @action_type = action_type
   end
 
   def send
@@ -137,7 +148,11 @@ class MailNotifier
   end
 
   def subject
-    "New Sign-up: #{@user.email}, #{@user.name}"
+    if @action_type == 'sign-up'
+      "New Sign-up: #{@user.email}, #{@user.name}"
+    else
+      "User changed his email address: #{@user.email}, #{@user.name}"
+    end
   end
 
   def htmlbody
