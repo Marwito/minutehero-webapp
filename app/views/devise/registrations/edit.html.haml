@@ -24,7 +24,9 @@
                 .form-group
                   = f.input :last_name
                 .form-group
-                  = f.label :country, 'Country', class: 'string optional'
+                  = f.input :phone_number
+                .form-group
+                  = f.label :country, '* Country', class: 'string optional'
                   %br
                   = f.collection_select :country, Country.all, :alpha2_code, :name, {include_blank: false}, {class: 'form-control'}
                 .form-group
