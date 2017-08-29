@@ -4,6 +4,7 @@ user = User.find_or_create_by!(email: ENV['admin_email']) do |u|
   u.password = Rails.application.secrets.admin_password
   u.password_confirmation = Rails.application.secrets.admin_password
   u.country = Country::DEFAULT_ALPHA_CODE
+  u.phone_number = '0123456789'
   u.admin!
   u.confirm
 end
