@@ -2,15 +2,13 @@
   .modal-dialog.modal-lg
     .modal-content
       .modal-header
-        %h3 How to use MinuteHero ?
+        %h3 How to use MinuteHero
         %button.close{"title" => "Close", "type" => "button", "data-dismiss" => "modal"}
           %span.glyphicon.glyphicon-remove
       .modal-body
         #carousel2.carousel.slide{"data-interval" => "false"}
           %ol.carousel-indicators
             %li.active{"data-slide-to" => "0", "data-target" => "#carousel2"}
-            %li{"data-slide-to" => "1", "data-target" => "#carousel2"}
-            %li{"data-slide-to" => "2", "data-target" => "#carousel2"}
             %li{"data-slide-to" => "3", "data-target" => "#carousel2"}
             %li{"data-slide-to" => "4", "data-target" => "#carousel2"}
             %li{"data-slide-to" => "5", "data-target" => "#carousel2"}
@@ -19,12 +17,6 @@
           .carousel-inner
             .item.active
               %img.img-responsive{:alt => "image", :src => "assets/Slideshow_Folie_1_small.jpg"}/
-              .carousel-caption
-            .item
-              %img.img-responsive{:alt => "image", :src => "assets/Slideshow_Folie_2_small.jpg"}/
-              .carousel-caption
-            .item
-              %img.img-responsive{:alt => "image", :src => "assets/Slideshow_Folie_3_small.jpg"}/
               .carousel-caption
             .item
               %img.img-responsive{:alt => "image", :src => "assets/Slideshow_Folie_4_small.jpg"}/
